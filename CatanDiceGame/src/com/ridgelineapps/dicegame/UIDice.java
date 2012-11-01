@@ -43,7 +43,8 @@ public class UIDice extends UIEntity {
       gold = BitmapFactory.decodeResource(resources, R.drawable.gold);
    }
    
-   public void paint(Canvas canvas) {
+   @Override
+   public void draw(Canvas canvas) {
       if(dice.getValue() != Dice.Value.None) {
          Bitmap bitmap = null;
          switch(dice.getValue()) {

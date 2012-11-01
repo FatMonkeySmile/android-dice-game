@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -162,10 +163,14 @@ public class GameView extends View {
 
    @Override
    protected void onDraw(Canvas canvas) {
-      canvas.drawBitmap(playSheetImage, 0, 0, imagePaint);
+      float scale = (float) playSheetImage.getScaledWidth(canvas) / 480;
+      Rect src = new Rect(0, 0, (int) (480 * scale), (int) (800 * scale));
+      Rect dest = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
+      
+      canvas.drawBitmap(playSheetImage, src, dest, imagePaint);
       
       for(UIEntity e : entities) {
-         e.onDraw(canvas);
+         e.draw(canvas);
       }
    }
    

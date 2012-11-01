@@ -623,7 +623,7 @@ public class Polygon implements Shape, java.io.Serializable {
     
    int[] Arrays_copyOf(int[] array, int count) {
       int[] ret = new int[count];
-      for(int i=0; i < count; i++) {
+      for(int i=0; i < array.length; i++) {
          ret[i] = array[i];
       }
       return ret;
