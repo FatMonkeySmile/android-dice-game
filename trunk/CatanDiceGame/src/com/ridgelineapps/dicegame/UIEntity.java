@@ -1,7 +1,9 @@
 package com.ridgelineapps.dicegame;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Paint.Style;
 
 import com.ridgelineapps.dicegame.java.Polygon;
 
@@ -97,6 +99,35 @@ public class UIEntity {
       }
    }
    
-   public void onDraw(Canvas canvas) {
+   public void draw(Canvas canvas) {
+      Paint p = new Paint();
+      p.setStyle(Style.FILL);
+      switch (type) {
+      case dice:
+         p.setARGB(255, 255, 0, 0);
+         break;
+      case roll:
+         p.setARGB(255, 0, 255, 0);
+         break;
+      case turnOver:
+         p.setARGB(255, 0, 0, 255);
+         break;
+      case road:
+         p.setARGB(128, 200, 200, 100);
+         break;
+      case village:
+         p.setARGB(128, 255, 0, 255);
+         break;
+      case city:
+         p.setARGB(128, 200, 0, 0);
+         break;
+      case knight:
+         p.setARGB(128, 0, 0, 255);
+         break;
+      case resource:
+         p.setARGB(128, 255, 0, 0);
+         break;
+      }
+      canvas.drawPath(path, p);
    }
 }
