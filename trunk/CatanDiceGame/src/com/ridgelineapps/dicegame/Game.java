@@ -7,6 +7,7 @@ import java.util.ArrayList;
 //  new package name (resdicegame?)
 //  copyrights/gpl
 //  Green check overlay for usable knight resources
+//  Add quick rect check for isWithin()
 public class Game {
    Playsheet playsheet;
    Dice[] dice;
