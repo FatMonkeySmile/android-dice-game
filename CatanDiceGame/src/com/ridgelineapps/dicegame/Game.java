@@ -2,8 +2,11 @@ package com.ridgelineapps.dicegame;
 
 import java.util.ArrayList;
 
-//TODO: unhold, un-use knight resources
-//   new package name
+//TODO: 
+//  unhold, un-use knight resources
+//  new package name (resdicegame?)
+//  copyrights/gpl
+//  Green check overlay for usable knight resources
 public class Game {
    Playsheet playsheet;
    Dice[] dice;
