@@ -32,6 +32,10 @@ public class GameView extends View {
    
    MainActivity activity;
    
+   int diceLocX = 10;
+   int diceLocY = 660;
+   int diceBuffer = 20;
+   
    public GameView(Context context, Game game) {
       super(context);
       activity = (MainActivity) context;
@@ -41,10 +45,21 @@ public class GameView extends View {
       imagePaint.setFilterBitmap(true);
       imagePaint.setAntiAlias(true);
       playSheetImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.sheet);
+
+      UIDice.loadBitmaps(context.getResources());
+      int diceX = diceLocX;
+      int diceY = diceLocY;
+      for(int i=0; i < game.dice.length; i++) {
+         UIDice dice = new UIDice(game, i, diceX, diceY);
+         entities.add(dice);
+         diceX += UIDice.size + diceBuffer;
+      }
+      
+      entities.add(new UIDiceRoll(game, diceX, diceY));
       
       Polygon poly;
       Path path;
-      
+
       for(int i=0; i < Roads.touch.length; i++) {
          poly = new Polygon();
          path = new Path();

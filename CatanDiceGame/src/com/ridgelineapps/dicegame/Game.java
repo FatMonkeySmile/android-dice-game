@@ -8,6 +8,8 @@ import java.util.ArrayList;
 //  copyrights/gpl
 //  Green check overlay for usable knight resources
 //  Add quick rect check for isWithin()
+//  Size dice bitmaps
+
 public class Game {
    Playsheet playsheet;
    Dice[] dice;
@@ -76,6 +78,7 @@ public class Game {
    
    public void roll() {
       if(!canRoll()) {
+         newTurn(false);
          return;
       }
       

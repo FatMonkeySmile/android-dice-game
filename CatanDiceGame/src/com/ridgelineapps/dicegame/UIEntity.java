@@ -16,7 +16,7 @@ public class UIEntity {
       knight,
       resource,
       roll,
-      turnOver,
+//      turnOver,
    }
    
    float x1;
@@ -78,9 +78,9 @@ public class UIEntity {
          case roll:
             game.roll();
             break;
-         case turnOver:
-            game.newTurn(false);
-            break;
+//         case turnOver:
+//            game.newTurn(false);
+//            break;
          case road:
             game.buildRoad(index);
             break;
@@ -103,15 +103,15 @@ public class UIEntity {
       Paint p = new Paint();
       p.setStyle(Style.FILL);
       switch (type) {
-      case dice:
-         p.setARGB(255, 255, 0, 0);
-         break;
-      case roll:
-         p.setARGB(255, 0, 255, 0);
-         break;
-      case turnOver:
-         p.setARGB(255, 0, 0, 255);
-         break;
+//      case dice:
+//         p.setARGB(255, 255, 0, 0);
+//         break;
+//      case roll:
+//         p.setARGB(255, 0, 255, 0);
+//         break;
+//      case turnOver:
+//         p.setARGB(255, 0, 0, 255);
+//         break;
       case road:
          p.setARGB(128, 200, 200, 100);
          break;
