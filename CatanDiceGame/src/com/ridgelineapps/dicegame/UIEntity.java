@@ -106,9 +106,9 @@ public class UIEntity {
 //      case dice:
 //         p.setARGB(255, 255, 0, 0);
 //         break;
-      case roll:
-         p.setARGB(255, 0, 255, 0);
-         break;
+//      case roll:
+//         p.setARGB(255, 0, 255, 0);
+//         break;
 //      case turnOver:
 //         p.setARGB(255, 0, 0, 255);
 //         break;

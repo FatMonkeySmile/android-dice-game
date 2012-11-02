@@ -3,6 +3,7 @@ package com.ridgelineapps.dicegame;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Paint.Style;
 
 public class UIDiceRoll extends UIEntity {
    public static final int size = 50;
@@ -19,6 +20,7 @@ public class UIDiceRoll extends UIEntity {
       paint.setDither(true);
       paint.setFilterBitmap(true);
       paint.setAntiAlias(true);
+      paint.setStyle(Style.FILL);
       
       path = new Path();
       path.moveTo(x, y);
