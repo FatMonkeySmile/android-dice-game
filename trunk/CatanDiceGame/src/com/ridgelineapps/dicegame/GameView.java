@@ -194,7 +194,7 @@ public class GameView extends View {
 
       if((event.getAction() & MotionEvent.ACTION_UP) != 0) {
          for(UIEntity e : entities) {
-            if(e.isWithin(event.getX(), event.getY())) {
+            if(e.isWithin((int) event.getX(), (int) event.getY())) {
                e.up();
             }
          }

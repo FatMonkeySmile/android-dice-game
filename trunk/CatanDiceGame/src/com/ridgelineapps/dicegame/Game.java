@@ -23,6 +23,8 @@ public class Game {
    public static Dice.Value[] RESOURCES_KNIGHT = new Dice.Value[]{ Dice.Value.Wool, Dice.Value.Grain, Dice.Value.Ore };
    public static Dice.Value[] RESOURCES_CITY = new Dice.Value[]{ Dice.Value.Grain, Dice.Value.Grain, Dice.Value.Ore, Dice.Value.Ore, Dice.Value.Ore };
    
+   GameView gameView;
+   
    public Game() {
       playsheet = new Playsheet();
       knightResources = new ArrayList<Dice.Value>();
@@ -35,10 +37,16 @@ public class Game {
       newTurn(true);
    }
    
+   public void setGameView(GameView gameView) {
+      this.gameView = gameView;
+   }
+   
    public void reset() {
       turnsTaken = 0;
       playsheet.reset();
       newTurn(true);
+      if(gameView != null)
+         gameView.postInvalidate();      
    }
    
    public void newTurn(boolean firstTurn) {
@@ -55,6 +63,8 @@ public class Game {
       if(!firstTurn) {
          turnsTaken++;
       }
+      if(gameView != null)
+         gameView.postInvalidate();      
    }
    
    public boolean canUseKnightResource(int i) {
@@ -89,6 +99,8 @@ public class Game {
       }
       
       rolls++;
+      if(gameView != null)
+         gameView.postInvalidate();      
    }
    
    public boolean canRoll() {
@@ -103,6 +115,8 @@ public class Game {
       useResources(RESOURCES_VILLAGE);
       playsheet.buildVillage(i);
       builtResourceThisTurn = true;
+      if(gameView != null)
+         gameView.postInvalidate();            
    }
    
    public boolean canBuildVillage(int i) {
@@ -129,6 +143,8 @@ public class Game {
       useResources(RESOURCES_KNIGHT);
       playsheet.buildKnight(i);
       builtResourceThisTurn = true;
+      if(gameView != null)
+         gameView.postInvalidate();            
    }
    
    public boolean canBuildKnight(int i) {
@@ -155,6 +171,8 @@ public class Game {
       useResources(RESOURCES_ROAD);
       playsheet.buildRoad(i);
       builtResourceThisTurn = true;
+      if(gameView != null)
+         gameView.postInvalidate();            
    }
    
    public boolean canBuildRoad(int i) {
@@ -181,6 +199,8 @@ public class Game {
       useResources(RESOURCES_CITY);
       playsheet.buildCity(i);
       builtResourceThisTurn = true;
+      if(gameView != null)
+         gameView.postInvalidate();            
    }
    
    public boolean canBuildCity(int i) {

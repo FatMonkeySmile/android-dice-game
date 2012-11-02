@@ -20,7 +20,9 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         game = new Game();
-        setContentView(new GameView(this, game));
+        GameView gameView = new GameView(this, game);
+        game.setGameView(gameView);
+        setContentView(gameView);
     }
     
     @Override
