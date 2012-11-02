@@ -77,6 +77,7 @@ public class UIDice extends UIEntity {
             Rect src = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
             Rect dest = new Rect(x, y, x + size, y + size);
             canvas.drawBitmap(bitmap, src, dest, paint);
+            canvas.drawBitmap(bitmap, x, y, paint);
          }
       }
       super.draw(canvas);
