@@ -5,10 +5,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 
 public class UIDice extends UIEntity {
-   public static final int size = 80;
+   public static final int size = 40;
    Dice dice;
    int x;
    int y;
@@ -30,6 +31,13 @@ public class UIDice extends UIEntity {
       paint.setDither(true);
       paint.setFilterBitmap(true);
       paint.setAntiAlias(true);
+      
+      path = new Path();
+      path.moveTo(x, y);
+      path.lineTo(x + size, y);
+      path.lineTo(x + size, y + size);
+      path.lineTo(x, y + size);
+      path.close();
    }
    
    public static void loadBitmaps(Resources resources) {
@@ -67,9 +75,10 @@ public class UIDice extends UIEntity {
          }
          if(bitmap != null) {
             Rect src = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-            Rect dest = new Rect(0, 0, size, size);
+            Rect dest = new Rect(x, y, x + size, y + size);
             canvas.drawBitmap(bitmap, src, dest, paint);
          }
       }
+      super.draw(canvas);
    }
 }

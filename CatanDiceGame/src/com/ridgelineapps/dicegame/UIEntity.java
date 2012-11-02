@@ -19,10 +19,10 @@ public class UIEntity {
 //      turnOver,
    }
    
-   float x1;
-   float y1;
-   float x2;
-   float y2;
+   int x1;
+   int y1;
+   int x2;
+   int y2;
    
    Game game;
    
@@ -32,7 +32,7 @@ public class UIEntity {
    Type type;
    int index;
    
-   public UIEntity(Game game, Type type, int index, int x1, int y1, float x2, float y2) {
+   public UIEntity(Game game, Type type, int index, int x1, int y1, int x2, int y2) {
       this.type = type;
       this.game = game;
       this.index = index;
@@ -50,7 +50,7 @@ public class UIEntity {
       this.path = path;
    }
    
-   public boolean isWithin(float x, float y) {
+   public boolean isWithin(int x, int y) {
       if(poly == null) {
          if(x >= x1 && x <= x2 && y >= y1 && y <= y2) {
             return true;
@@ -106,9 +106,9 @@ public class UIEntity {
 //      case dice:
 //         p.setARGB(255, 255, 0, 0);
 //         break;
-//      case roll:
-//         p.setARGB(255, 0, 255, 0);
-//         break;
+      case roll:
+         p.setARGB(255, 0, 255, 0);
+         break;
 //      case turnOver:
 //         p.setARGB(255, 0, 0, 255);
 //         break;
