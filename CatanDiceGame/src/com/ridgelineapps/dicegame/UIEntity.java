@@ -159,7 +159,7 @@ public class UIEntity {
          break;
       case resource:
           if(game.playsheet.canUseKnightResource(index)) {
-              p.setARGB(128, 200, 200, 200);
+              p.setARGB(185, 200, 200, 200);
           }
           else if(game.playsheet.isKnightResourceUsed(index)) {
               p.setARGB(128, 20, 20, 20);
@@ -178,10 +178,10 @@ public class UIEntity {
    }
    
    public void highlight(Paint p) {
-       p.setARGB(128, 100, 200, 100);
+       p.setARGB(128, 130, 245, 80);
    }
    
    public void darken(Paint p) {
-       p.setARGB(128, 0, 0, 100);
+       p.setARGB(128, 100, 100, 0);
    }
 }

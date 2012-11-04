@@ -41,6 +41,8 @@ public class GameView extends View {
    int diceLocX = 15;
    int diceLocY = 650;
    int diceBuffer = 13;
+   int rollOffsetX = 65;
+   int rollOffsetY = 18;
    
    public GameView(Context context, Game game) {
       super(context);
@@ -72,9 +74,8 @@ public class GameView extends View {
          diceX += UIDice.size + diceBuffer;
       }
       
-      diceX = 15;
-      diceY += UIDice.size + 15;
-      entities.add(new UIDiceRoll(game, diceX, diceY));
+      diceY += UIDice.size + rollOffsetY;
+      entities.add(new UIDiceRoll(game, rollOffsetX, diceY, width - rollOffsetX * 2, height - rollOffsetY - diceY));
       
       Polygon poly;
       Path path;
@@ -198,10 +199,8 @@ public class GameView extends View {
    @Override
    protected void onDraw(Canvas canvas) {
       float scale = (float) playSheetImage.getScaledWidth(canvas) / 480;
-      Rect src = new Rect(0, 0, (int) (480 * scale), (int) (800 * scale));
-      
-//      Rect dest = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
-      Rect dest = new Rect(0, 0, 480, 800); //canvas.getWidth(), canvas.getHeight());
+      Rect src = new Rect(0, 0, (int) (width * scale), (int) (height * scale));
+      Rect dest = new Rect(0, 0, width, height); //canvas.getWidth(), canvas.getHeight());
       
       canvas.drawBitmap(playSheetImage, src, dest, imagePaint);
       
@@ -212,7 +211,7 @@ public class GameView extends View {
       String score = "" + game.playsheet.getScore();
       int xOffset = (int) (scorePaint.measureText(score) / 2);
       canvas.drawText(score, scoreLoc.x - xOffset, scoreLoc.y, scorePaint);
-      canvas.drawRect(0, 0, 480, 800, borderPaint);
+      canvas.drawRect(0, 0, width - 2, height - 2, borderPaint);
    }
    
    @Override
