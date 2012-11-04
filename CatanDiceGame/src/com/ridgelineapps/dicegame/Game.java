@@ -10,6 +10,7 @@ import java.util.ArrayList;
 //  Add quick rect check for isWithin()
 //  Size dice bitmaps
 //  All colors better
+//  Icon
 
 public class Game {
    Playsheet playsheet;
