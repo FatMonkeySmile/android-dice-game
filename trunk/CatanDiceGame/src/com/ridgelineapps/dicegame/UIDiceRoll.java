@@ -6,7 +6,7 @@ import android.graphics.Path;
 import android.graphics.Paint.Style;
 
 public class UIDiceRoll extends UIEntity {
-   public static final int size = 50;
+   public static final int size = UIDice.size;
    int x;
    int y;
    Paint paint;

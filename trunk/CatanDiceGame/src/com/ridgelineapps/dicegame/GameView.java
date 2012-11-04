@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.view.MotionEvent;
@@ -24,17 +26,21 @@ public class GameView extends View {
    int width = 480;
    int height = 800;
    
+   Point scoreLoc = new Point(444, 184);
+   
    Game game;
    ArrayList<UIEntity> entities = new ArrayList<UIEntity>();
    
    Bitmap playSheetImage;
    Paint imagePaint;
+   Paint borderPaint;
+   Paint scorePaint;
    
    MainActivity activity;
    
-   int diceLocX = 10;
-   int diceLocY = 660;
-   int diceBuffer = 20;
+   int diceLocX = 15;
+   int diceLocY = 650;
+   int diceBuffer = 13;
    
    public GameView(Context context, Game game) {
       super(context);
@@ -46,6 +52,17 @@ public class GameView extends View {
       imagePaint.setAntiAlias(true);
       playSheetImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.sheet);
 
+      scorePaint = new Paint();
+      scorePaint.setFakeBoldText(true);
+      scorePaint.setAntiAlias(true);
+      scorePaint.setARGB(255, 0, 10, 10);
+      scorePaint.setTextSize(23);
+      
+      borderPaint = new Paint();
+      borderPaint.setStyle(Style.STROKE);
+      borderPaint.setStrokeWidth(3);
+      borderPaint.setARGB(255, 200, 200, 100);
+      
       UIDice.loadBitmaps(context.getResources());
       int diceX = diceLocX;
       int diceY = diceLocY;
@@ -55,6 +72,8 @@ public class GameView extends View {
          diceX += UIDice.size + diceBuffer;
       }
       
+      diceX = 15;
+      diceY += UIDice.size + 15;
       entities.add(new UIDiceRoll(game, diceX, diceY));
       
       Polygon poly;
@@ -148,7 +167,7 @@ public class GameView extends View {
             }
          }
          path.close();
-         UIEntity entity = new UIEntity(game, UIEntity.Type.resource, i, poly, path);
+         UIEntity entity = new UIEntity(game, UIEntity.Type.resource, i + 1, poly, path);
          entities.add(entity);
       }
 
@@ -171,7 +190,7 @@ public class GameView extends View {
             }
          }
          path.close();
-         UIEntity entity = new UIEntity(game, UIEntity.Type.knight, i, poly, path);
+         UIEntity entity = new UIEntity(game, UIEntity.Type.knight, i + 1, poly, path);
          entities.add(entity);
       }
    }
@@ -180,13 +199,20 @@ public class GameView extends View {
    protected void onDraw(Canvas canvas) {
       float scale = (float) playSheetImage.getScaledWidth(canvas) / 480;
       Rect src = new Rect(0, 0, (int) (480 * scale), (int) (800 * scale));
-      Rect dest = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
+      
+//      Rect dest = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
+      Rect dest = new Rect(0, 0, 480, 800); //canvas.getWidth(), canvas.getHeight());
       
       canvas.drawBitmap(playSheetImage, src, dest, imagePaint);
       
       for(UIEntity e : entities) {
          e.draw(canvas);
       }
+
+      String score = "" + game.playsheet.getScore();
+      int xOffset = (int) (scorePaint.measureText(score) / 2);
+      canvas.drawText(score, scoreLoc.x - xOffset, scoreLoc.y, scorePaint);
+      canvas.drawRect(0, 0, 480, 800, borderPaint);
    }
    
    @Override

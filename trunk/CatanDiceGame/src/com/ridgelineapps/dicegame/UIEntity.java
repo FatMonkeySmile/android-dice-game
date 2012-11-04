@@ -102,6 +102,7 @@ public class UIEntity {
    public void draw(Canvas canvas) {
       Paint p = new Paint();
       p.setStyle(Style.FILL);
+      boolean draw = true;
       switch (type) {
 //      case dice:
 //         p.setARGB(255, 255, 0, 0);
@@ -113,21 +114,74 @@ public class UIEntity {
 //         p.setARGB(255, 0, 0, 255);
 //         break;
       case road:
-         p.setARGB(128, 200, 200, 100);
+          if(game.canBuildRoad(index)) {
+              highlight(p);
+          }
+          else if(game.playsheet.roads[index]) {
+              darken(p);
+          }
+          else {
+              draw = false;
+          }
          break;
       case village:
-         p.setARGB(128, 255, 0, 255);
+          if(game.canBuildVillage(index)) {
+              highlight(p);
+          }
+          else if(game.playsheet.villages[index]) {
+              darken(p);
+          }
+          else {
+              draw = false;
+          }
          break;
       case city:
-         p.setARGB(128, 200, 0, 0);
+          if(game.canBuildCity(index)) {
+              highlight(p);
+          }
+          else if(game.playsheet.cities[index]) {
+              darken(p);
+          }
+          else {
+              draw = false;
+          }
          break;
       case knight:
-         p.setARGB(128, 0, 0, 255);
+          if(game.canBuildKnight(index)) {
+              highlight(p);
+          }
+          else if(game.playsheet.knights >= index) {
+              darken(p);
+          }
+          else {
+              draw = false;
+          }
          break;
       case resource:
-         p.setARGB(128, 255, 0, 0);
+          if(game.playsheet.canUseKnightResource(index)) {
+              p.setARGB(128, 200, 200, 200);
+          }
+          else if(game.playsheet.isKnightResourceUsed(index)) {
+              p.setARGB(128, 20, 20, 20);
+          }
+          else {
+              draw = false;
+          }
+         break;
+     default:
+         draw = false;
          break;
       }
-      canvas.drawPath(path, p);
+      if(draw) {
+          canvas.drawPath(path, p);
+      }
+   }
+   
+   public void highlight(Paint p) {
+       p.setARGB(128, 100, 200, 100);
+   }
+   
+   public void darken(Paint p) {
+       p.setARGB(128, 0, 0, 100);
    }
 }
