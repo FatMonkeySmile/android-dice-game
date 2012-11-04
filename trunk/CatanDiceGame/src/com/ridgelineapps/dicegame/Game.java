@@ -9,6 +9,7 @@ import java.util.ArrayList;
 //  Green check overlay for usable knight resources
 //  Add quick rect check for isWithin()
 //  Size dice bitmaps
+//  All colors better
 
 public class Game {
    Playsheet playsheet;
