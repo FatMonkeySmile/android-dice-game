@@ -49,9 +49,18 @@ public class UIDiceRoll extends UIEntity {
       String text;
       if(game.canRoll()) {
          text = "Roll";
-         if(game.rolls > 0) {
-            text += " (" + game.rolls + ")";
-         }
+        if (game.rolls == 0) {
+            text = "1st " + text;
+        }
+        if (game.rolls == 1) {
+            text = "2nd " + text;
+        }
+        if (game.rolls == 2) {
+            text = "3rd " + text;
+        }
+            //         if(game.rolls > 0) {
+//            text += " (" + game.rolls + ")";
+//         }
       }
       else {
          text = "Done";
