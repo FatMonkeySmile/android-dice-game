@@ -189,24 +189,32 @@ public class Playsheet {
    public Dice.Value useKnightResource(int i) {
       if(canUseKnightResource(i)) {
          resourcesAvail[i] = false;
-         switch(i) {
-            case 1:
-               return Dice.Value.Ore;
-            case 2:
-               return Dice.Value.Grain;
-            case 3:
-               return Dice.Value.Wool;
-            case 4:
-               return Dice.Value.Lumber;
-            case 5:
-               return Dice.Value.Brick;
-            case 6:
-               return Dice.Value.Any;
-         }
+         return getKnightResource(i);
       }
       
       return Dice.Value.None;
    }
+   
+   public Dice.Value getKnightResource(int i) {
+       if(canUseKnightResource(i)) {
+          switch(i) {
+             case 1:
+                return Dice.Value.Ore;
+             case 2:
+                return Dice.Value.Grain;
+             case 3:
+                return Dice.Value.Wool;
+             case 4:
+                return Dice.Value.Lumber;
+             case 5:
+                return Dice.Value.Brick;
+             case 6:
+                return Dice.Value.Any;
+          }
+       }
+       
+       return Dice.Value.None;
+    }
    
    public void reset() {
       knights = 0;
