@@ -60,28 +60,7 @@ public class Game {
       
       //Return unused knightResources
       for(int i=0; i < knightResources.size(); i++) {
-          int index = 0;
-          switch(knightResources.get(i)) {
-              case Ore:
-                  index = 1;
-                  break;
-              case Grain:
-                  index = 2;
-                  break;
-              case Wool:
-                  index = 3;
-                  break;
-              case Lumber:
-                  index = 4;
-                  break;
-              case Brick:
-                  index = 5;
-                  break;
-              case Any:
-                  index = 6;
-                  break;
-           }
-          
+          int index = getKnightResourceIndex(knightResources.get(i));
           if(index > 0) {
               playsheet.resourcesAvail[index] = true;
           }
@@ -108,7 +87,7 @@ public class Game {
    }
    
    public void consumeKnightResource(int i) {
-      Dice.Value val = playsheet.useKnightResource(i);
+      Dice.Value val = playsheet.getKnightResource(i);
       if(val != Dice.Value.None) {
          knightResources.add(val);
       }
@@ -319,7 +298,9 @@ public class Game {
             }
             for(int i=knightResourcesUsed.length - 1; i >= 0; i--) {
                if(knightResourcesUsed[i]) {
-                  knightResources.remove(i);
+                   knightResources.remove(i);
+                   int index = getKnightResourceIndex(knightResources.get(i));
+                   playsheet.useKnightResource(index);
                }
             }
          }
@@ -398,5 +379,30 @@ public class Game {
    
    public boolean gameOver() {
        return (turnsTaken == 15);
+   }
+   
+   public int getKnightResourceIndex(Dice.Value val) {
+       int index = 0;
+       switch(val) {
+           case Ore:
+               index = 1;
+               break;
+           case Grain:
+               index = 2;
+               break;
+           case Wool:
+               index = 3;
+               break;
+           case Lumber:
+               index = 4;
+               break;
+           case Brick:
+               index = 5;
+               break;
+           case Any:
+               index = 6;
+               break;
+        }
+       return index;
    }
 }

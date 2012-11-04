@@ -158,11 +158,14 @@ public class UIEntity {
           }
          break;
       case resource:
+//          if(game.playsheet.canUseKnightResource(index)) {
+//              p.setARGB(185, 200, 200, 200);
+//          }
+//          else if(game.playsheet.isKnightResourceUsed(index)) {
+//              p.setARGB(128, 20, 20, 20);
+//          }
           if(game.playsheet.canUseKnightResource(index)) {
-              p.setARGB(185, 200, 200, 200);
-          }
-          else if(game.playsheet.isKnightResourceUsed(index)) {
-              p.setARGB(128, 20, 20, 20);
+              darken(p);
           }
           else {
               draw = false;
