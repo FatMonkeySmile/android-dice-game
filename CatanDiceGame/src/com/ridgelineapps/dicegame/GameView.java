@@ -211,7 +211,13 @@ public class GameView extends View {
       String score = "" + game.playsheet.getScore();
       int xOffset = (int) (scorePaint.measureText(score) / 2);
       canvas.drawText(score, scoreLoc.x - xOffset, scoreLoc.y, scorePaint);
-      canvas.drawRect(0, 0, width - 2, height - 2, borderPaint);
+      canvas.drawRect(0, 0, width - 1, height - 1, borderPaint);
+      
+      if(!game.isGameDone()) {
+          String turn = "" + (game.turnsTaken + 1);
+          xOffset = (int) (scorePaint.measureText(turn) / 2);
+          canvas.drawText(turn, 449 - xOffset, 38, scorePaint);
+      }
    }
    
    @Override

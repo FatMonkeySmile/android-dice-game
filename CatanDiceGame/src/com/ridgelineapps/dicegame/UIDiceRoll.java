@@ -59,7 +59,7 @@ public class UIDiceRoll extends UIEntity {
 //            text += " (" + game.rolls + ")";
 //         }
       }
-      else if(game.gameOver()) {
+      else if(game.isGameDone()) {
           text = "Play again";
       }
       else {

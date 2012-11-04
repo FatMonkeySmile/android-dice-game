@@ -35,7 +35,7 @@ public class UIDice extends UIEntity {
       paint.setAntiAlias(true);
       
       holdPaint = new Paint();
-      holdPaint.setARGB(128, 0, 0, 100);
+      holdPaint.setARGB(100, 180, 165, 100);
       holdPaint.setStyle(Style.FILL);
       
       path = new Path();
@@ -85,6 +85,7 @@ public class UIDice extends UIEntity {
             canvas.drawBitmap(bitmap, src, dest, paint);
 //            canvas.drawBitmap(bitmap, x, y, paint);
             
+//            if(dice.isHeld() || !game.canRoll()) {
             if(dice.isHeld() && game.canRoll()) {
                 canvas.drawRect(x, y, x + size, y + size, holdPaint);
             }
