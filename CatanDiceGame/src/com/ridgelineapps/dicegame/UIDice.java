@@ -7,9 +7,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.Paint.Style;
 
 public class UIDice extends UIEntity {
-   public static final int size = 40;
+   public static final int size = 65;
    Dice dice;
    int x;
    int y;
@@ -20,6 +21,7 @@ public class UIDice extends UIEntity {
    static Bitmap lumber;
    static Bitmap gold;
    Paint paint;
+   Paint holdPaint;
    
    public UIDice(Game game, int index, int x, int y) {
       super(game, Type.dice, index, x, y, x + size, y + size);
@@ -31,6 +33,10 @@ public class UIDice extends UIEntity {
       paint.setDither(true);
       paint.setFilterBitmap(true);
       paint.setAntiAlias(true);
+      
+      holdPaint = new Paint();
+      holdPaint.setARGB(128, 0, 0, 100);
+      holdPaint.setStyle(Style.FILL);
       
       path = new Path();
       path.moveTo(x, y);
@@ -51,7 +57,7 @@ public class UIDice extends UIEntity {
    
    @Override
    public void draw(Canvas canvas) {
-      if(dice.getValue() != Dice.Value.None) {
+      if(dice.isUsable() && dice.getValue() != Dice.Value.None) {
          Bitmap bitmap = null;
          switch(dice.getValue()) {
             case Wool:
@@ -77,7 +83,11 @@ public class UIDice extends UIEntity {
             Rect src = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
             Rect dest = new Rect(x, y, x + size, y + size);
             canvas.drawBitmap(bitmap, src, dest, paint);
-            canvas.drawBitmap(bitmap, x, y, paint);
+//            canvas.drawBitmap(bitmap, x, y, paint);
+            
+            if(dice.isHeld() && game.canRoll()) {
+                canvas.drawRect(x, y, x + size, y + size, holdPaint);
+            }
          }
       }
       super.draw(canvas);

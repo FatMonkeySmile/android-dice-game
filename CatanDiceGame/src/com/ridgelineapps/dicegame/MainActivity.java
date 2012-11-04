@@ -45,7 +45,6 @@ public class MainActivity extends Activity {
          break;
       case R.id.restart:
          //TODO: confirm restart
-         Toast.makeText(this, "You pressed restart!", Toast.LENGTH_LONG).show();
          game.reset();
          break;
       }

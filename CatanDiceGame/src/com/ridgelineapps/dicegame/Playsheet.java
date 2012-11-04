@@ -60,6 +60,10 @@ public class Playsheet {
       if(cities[i]) {
          return false;
       }
+      
+      if(i > 0 && !cities[i-1]) {
+          return false;
+       }      
 
       if(i == 0)
          return roads[2];
@@ -170,6 +174,18 @@ public class Playsheet {
       return false;
    }
    
+   public boolean isKnightResourceUsed(int i) {
+       if(i < 1 || i > 6) {
+          return false;
+       }
+       
+       if(knights >= i && !resourcesAvail[i]) {
+          return true;
+       }
+       
+       return false;
+    }
+   
    public Dice.Value useKnightResource(int i) {
       if(canUseKnightResource(i)) {
          resourcesAvail[i] = false;
@@ -201,13 +217,13 @@ public class Playsheet {
       roads = new boolean[17];
       roads[0] = true;
       villages = new boolean[6];
-      villages = new boolean[4];
+      cities = new boolean[4];
       turnsNothingBuilt = 0;
    }
    
    public int getScore() {
       int score = 0;
-      for(int i=0; i < roads.length; i++) {
+      for(int i=1; i < roads.length; i++) {
          if(roads[i]) {
             score++;
          }

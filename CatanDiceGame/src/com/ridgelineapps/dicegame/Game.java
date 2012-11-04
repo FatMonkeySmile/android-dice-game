@@ -50,7 +50,41 @@ public class Game {
    }
    
    public void newTurn(boolean firstTurn) {
+       if(gameOver()) {
+           return;
+       }
+       
       rolls = 0;
+      
+      //Return unused knightResources
+      for(int i=0; i < knightResources.size(); i++) {
+          int index = 0;
+          switch(knightResources.get(i)) {
+              case Ore:
+                  index = 1;
+                  break;
+              case Grain:
+                  index = 2;
+                  break;
+              case Wool:
+                  index = 3;
+                  break;
+              case Lumber:
+                  index = 4;
+                  break;
+              case Brick:
+                  index = 5;
+                  break;
+              case Any:
+                  index = 6;
+                  break;
+           }
+          
+          if(index > 0) {
+              playsheet.resourcesAvail[index] = true;
+          }
+      }
+      
       knightResources.clear();
       for(int i=0; i < dice.length; i++) {
          dice[i].reset();
@@ -76,6 +110,8 @@ public class Game {
       if(val != Dice.Value.None) {
          knightResources.add(val);
       }
+      if(gameView != null)
+          gameView.postInvalidate();      
    }
    
    public void holdDice(int i) {
@@ -83,7 +119,14 @@ public class Game {
          return;
       }
       
-      dice[i].hold();
+      if(dice[i].held && dice[i].rollHeld == rolls) {
+          dice[i].held = false;
+      }
+      else if(!dice[i].held){
+          dice[i].hold(rolls);
+      }
+      if(gameView != null)
+          gameView.postInvalidate();      
    }
    
    public void roll() {
@@ -104,7 +147,7 @@ public class Game {
    }
    
    public boolean canRoll() {
-      return (rolls < 3);
+      return (rolls < 3 && !builtResourceThisTurn && !gameOver());
    }
    
    public void buildVillage(int i) {
@@ -221,7 +264,7 @@ public class Game {
    
    public void useResources(Dice.Value[] resources) {
       boolean[] diceUsed = new boolean[dice.length];
-      boolean[] knightResourcesUsed = new boolean[knightResources.size()];
+      boolean[] knightResourcesUsed;
       int gold = 0;
       for(Dice die : dice) {
          if(die.isUsable() && die.getValue().equals(Dice.Value.Gold)) {
@@ -229,6 +272,7 @@ public class Game {
          }
       }         
       for(Dice.Value val : resources) {
+         knightResourcesUsed = new boolean[knightResources.size()];
          boolean found = false;
          for(int i=0; i < dice.length; i++) {
             if(!dice[i].isUsable() || diceUsed[i]) {
@@ -251,17 +295,19 @@ public class Game {
                   break;
                }
             }            
-            for(int i=0; i < knightResources.size(); i++) {
-               if(knightResourcesUsed[i]) {
-                  continue;
-               }
-               if(knightResources.get(i).equals(Dice.Value.Any)) {
-                  knightResourcesUsed[i] = true;
-                  found = true;
-                  break;
-               }
-            }            
          }
+         if(!found) {
+             for(int i=0; i < knightResources.size(); i++) {
+                if(knightResourcesUsed[i]) {
+                   continue;
+                }
+                if(knightResources.get(i).equals(Dice.Value.Any)) {
+                   knightResourcesUsed[i] = true;
+                   found = true;
+                   break;
+                }
+             }            
+          }
          
          if(found) {
             for(int i=0; i < dice.length; i++) {
@@ -321,17 +367,19 @@ public class Game {
                   break;
                }
             }            
-            for(int i=0; i < knightResources.size(); i++) {
-               if(knightResourcesUsed[i]) {
-                  continue;
-               }
-               if(knightResources.get(i).equals(Dice.Value.Any)) {
-                  knightResourcesUsed[i] = true;
-                  found = true;
-                  break;
-               }
-            }            
          }
+         if(!found) {
+             for(int i=0; i < knightResources.size(); i++) {
+                if(knightResourcesUsed[i]) {
+                   continue;
+                }
+                if(knightResources.get(i).equals(Dice.Value.Any)) {
+                   knightResourcesUsed[i] = true;
+                   found = true;
+                   break;
+                }
+             }            
+          }
          if(!found) {
             if(gold >= 2) {
                gold -= 2;
@@ -345,5 +393,9 @@ public class Game {
          }
       }
       return true;
+   }
+   
+   public boolean gameOver() {
+       return (turnsTaken == 15);
    }
 }
