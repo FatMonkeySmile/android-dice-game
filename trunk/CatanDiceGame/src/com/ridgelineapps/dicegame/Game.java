@@ -3,12 +3,9 @@ package com.ridgelineapps.dicegame;
 import java.util.ArrayList;
 
 //TODO: 
-//  unhold, un-use knight resources
 //  new package name (resdicegame?)
 //  copyrights/gpl
-//  Green check overlay for usable knight resources
 //  Add quick rect check for isWithin()
-//  Size dice bitmaps
 //  All colors better
 //  Icon
 //  Confirm "Use knight resource(s)"
@@ -16,6 +13,8 @@ import java.util.ArrayList;
 //  Center vertically
 //  Strings in resources
 //  High score menu & toast when beating after 1st play
+//  fix dice bitmaps
+//  Turn scores at top
 
 public class Game {
    Playsheet playsheet;
@@ -57,7 +56,7 @@ public class Game {
    }
    
    public void newTurn(boolean firstTurn) {
-       if(gameOver()) {
+       if(isGameDone()) {
            return;
        }
        
@@ -116,7 +115,7 @@ public class Game {
    }
    
    public void roll() {
-       if(gameOver()) {
+       if(isGameDone()) {
            reset();
            return;
        }
@@ -138,7 +137,7 @@ public class Game {
    }
    
    public boolean canRoll() {
-      return (rolls < 3 && !builtResourceThisTurn && !gameOver());
+      return (rolls < 3 && !builtResourceThisTurn && !isGameDone());
    }
    
    public void buildVillage(int i) {
@@ -381,7 +380,7 @@ public class Game {
       return true;
    }
    
-   public boolean gameOver() {
+   public boolean isGameDone() {
        return (turnsTaken == 15);
    }
    
