@@ -386,7 +386,6 @@ public class Game {
             if(gold >= 2) {
                gold -= 2;
                found = true;
-               break;
             }
          }
          
