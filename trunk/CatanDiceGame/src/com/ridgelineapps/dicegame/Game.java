@@ -11,6 +11,11 @@ import java.util.ArrayList;
 //  Size dice bitmaps
 //  All colors better
 //  Icon
+//  Confirm "Use knight resource(s)"
+//  About screen
+//  Center vertically
+//  Strings in resources
+//  High score menu & toast when beating after 1st play
 
 public class Game {
    Playsheet playsheet;
@@ -111,6 +116,11 @@ public class Game {
    }
    
    public void roll() {
+       if(gameOver()) {
+           reset();
+           return;
+       }
+       
       if(!canRoll()) {
          newTurn(false);
          return;
@@ -244,8 +254,6 @@ public class Game {
    }
    
    public void useResources(Dice.Value[] resources) {
-      boolean[] diceUsed = new boolean[dice.length];
-      boolean[] knightResourcesUsed;
       int gold = 0;
       for(Dice die : dice) {
          if(die.isUsable() && die.getValue().equals(Dice.Value.Gold)) {
@@ -253,73 +261,68 @@ public class Game {
          }
       }         
       for(Dice.Value val : resources) {
-         knightResourcesUsed = new boolean[knightResources.size()];
          boolean found = false;
          for(int i=0; i < dice.length; i++) {
-            if(!dice[i].isUsable() || diceUsed[i]) {
+            if(!dice[i].isUsable()) {
                continue;
             }
             if(dice[i].value.equals(val)) {
-               diceUsed[i] = true;
+               dice[i].use();
                found = true;
                break;
             }
          }
+         
          if(!found) {
-            for(int i=0; i < knightResources.size(); i++) {
-               if(knightResourcesUsed[i]) {
-                  continue;
-               }
+           if(gold >= 2) {
+             found = true;
+             int goldNeeded = 2;
+             for(int i=0; i < dice.length; i++) {
+                if(dice[i].isUsable() && dice[i].value.equals(Dice.Value.Gold)) {
+                   dice[i].use();
+                   if(--goldNeeded == 0) {
+                      break;
+                   }
+                }
+             }
+           }
+         }
+             
+         if(!found) {
+            for(int i = knightResources.size() - 1; i >=0 ; i--) {
                if(knightResources.get(i).equals(val)) {
-                  knightResourcesUsed[i] = true;
+                  int index = getKnightResourceIndex(knightResources.get(i));
+                  playsheet.useKnightResource(index);
+                  knightResources.remove(i);
                   found = true;
                   break;
                }
             }            
          }
          if(!found) {
-             for(int i=0; i < knightResources.size(); i++) {
-                if(knightResourcesUsed[i]) {
-                   continue;
-                }
-                if(knightResources.get(i).equals(Dice.Value.Any)) {
-                   knightResourcesUsed[i] = true;
-                   found = true;
-                   break;
-                }
-             }            
-          }
-         
-         if(found) {
-            for(int i=0; i < dice.length; i++) {
-               if(diceUsed[i]) {
-                  dice[i].use();
-               }
-            }
-            for(int i=knightResourcesUsed.length - 1; i >= 0; i--) {
-               if(knightResourcesUsed[i]) {
-                   knightResources.remove(i);
-                   int index = getKnightResourceIndex(knightResources.get(i));
-                   playsheet.useKnightResource(index);
-               }
-            }
-         }
-         else if(gold >= 2) {
-            int goldNeeded = 2;
-            for(int i=0; i < dice.length; i++) {
-               if(dice[i].isUsable() && dice[i].value.equals(Dice.Value.Gold)) {
-                  dice[i].use();
-                  if(--goldNeeded == 0) {
+             for(int i = knightResources.size() - 1; i >=0 ; i--) {
+                 if(knightResources.get(i).equals(Dice.Value.Any)) {
+                     int index = getKnightResourceIndex(knightResources.get(i));
+                     playsheet.useKnightResource(index);
+                     knightResources.remove(i);
+                     found = true;
                      break;
                   }
-               }
-            }
-         }
+             }            
+          }
       }
    }
 
    public boolean canBuild(Dice.Value[] resourcesRequired) {
       boolean[] diceUsed = new boolean[dice.length];
+      
+      knightResources.clear();
+      for(int i=1; i <= 6; i++) {
+          if(canUseKnightResource(i)) {
+              knightResources.add(playsheet.getKnightResource(i));
+          }
+      }
+      
       boolean[] knightResourcesUsed = new boolean[knightResources.size()];
       int gold = 0;
       for(Dice die : dice) {
@@ -340,6 +343,13 @@ public class Game {
             }
          }
          if(!found) {
+             if(gold >= 2) {
+                gold -= 2;
+                found = true;
+             }
+         }
+         
+         if(!found) {
             for(int i=0; i < knightResources.size(); i++) {
                if(knightResourcesUsed[i]) {
                   continue;
@@ -363,12 +373,6 @@ public class Game {
                 }
              }            
           }
-         if(!found) {
-            if(gold >= 2) {
-               gold -= 2;
-               found = true;
-            }
-         }
          
          if(!found) {
             return false;

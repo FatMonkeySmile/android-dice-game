@@ -43,9 +43,6 @@ public class UIDiceRoll extends UIEntity {
    
    @Override
    public void draw(Canvas canvas) {
-      if(game.gameOver()) {
-          return;
-      }
       String text;
       if(game.canRoll()) {
          text = "Roll";
@@ -61,6 +58,9 @@ public class UIDiceRoll extends UIEntity {
             //         if(game.rolls > 0) {
 //            text += " (" + game.rolls + ")";
 //         }
+      }
+      else if(game.gameOver()) {
+          text = "Play again";
       }
       else {
          text = "Done";
