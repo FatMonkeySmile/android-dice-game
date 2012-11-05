@@ -23,6 +23,7 @@ public class Playsheet {
    boolean[] villages;
    boolean[] cities;
    int turnsNothingBuilt = 0;
+   int[] turnScore;
    
    public Playsheet() {
       reset();
@@ -243,6 +244,21 @@ public class Playsheet {
       villages = new boolean[6];
       cities = new boolean[4];
       turnsNothingBuilt = 0;
+      turnScore = new int[16];
+   }
+   
+   public void scoreTurn(int turn) {
+      if(turn < 1 || turn > 15) {
+         return;
+      }
+      turnScore[turn] = getScore() - turnScore[turn - 1];
+   }
+   
+   public int getTurnScore(int turn) {
+      if(turn < 1 || turn > 15) {
+         return 0;
+      }
+      return turnScore[turn];
    }
    
    public int getScore() {

@@ -34,6 +34,7 @@ import com.ridgelineapps.dicegame.mappings.Cities;
 import com.ridgelineapps.dicegame.mappings.Knights;
 import com.ridgelineapps.dicegame.mappings.Resources;
 import com.ridgelineapps.dicegame.mappings.Roads;
+import com.ridgelineapps.dicegame.mappings.Scores;
 import com.ridgelineapps.dicegame.mappings.Villages;
 
 public class GameView extends View {
@@ -67,7 +68,7 @@ public class GameView extends View {
       imagePaint.setDither(true);
       imagePaint.setFilterBitmap(true);
       imagePaint.setAntiAlias(true);
-      playSheetImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.sheet);
+      playSheetImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.orig_sheet);
 
       scorePaint = new Paint();
       scorePaint.setFakeBoldText(true);
@@ -231,17 +232,26 @@ public class GameView extends View {
          e.draw(canvas);
       }
 
+      for(int i=1; i <= game.turnsTaken; i++) {
+         int x = Scores.view[i][0];
+         int y = Scores.view[i][1];
+         
+         String turnScore = "" + game.playsheet.getTurnScore(i);
+         //TODO: Cache xOffset?
+         int xOffset = (int) (scorePaint.measureText(turnScore) / 2);
+         canvas.drawText(turnScore, x - xOffset, y, scorePaint);
+      }
+      
       String score = "" + game.playsheet.getScore();
       int xOffset = (int) (scorePaint.measureText(score) / 2);
       canvas.drawText(score, scoreLoc.x - xOffset, scoreLoc.y, scorePaint);
       canvas.drawRect(0, 0, width - 1, height - 1, borderPaint);
       
-      if(!game.isGameDone()) {
-////         String turn = "" + (game.turnsTaken + 1);
-          String turn = "Turn:  " + (game.turnsTaken + 1);
-          xOffset = (int) (scorePaint.measureText(turn) / 2);
-          canvas.drawText(turn, 334, 38, scorePaint);
-      }
+//      if(!game.isGameDone()) {
+//          String turn = "Turn:  " + (game.turnsTaken + 1);
+//          xOffset = (int) (scorePaint.measureText(turn) / 2);
+//          canvas.drawText(turn, 334, 38, scorePaint);
+//      }
    }
    
    @Override
