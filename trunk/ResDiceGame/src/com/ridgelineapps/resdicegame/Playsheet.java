@@ -251,14 +251,14 @@ public class Playsheet {
       if(turn < 1 || turn > 15) {
          return;
       }
-      turnScore[turn] = getScore() - turnScore[turn - 1];
+      turnScore[turn] = getScore();
    }
    
    public int getTurnScore(int turn) {
       if(turn < 1 || turn > 15) {
          return 0;
       }
-      return turnScore[turn];
+      return turnScore[turn] - turnScore[turn - 1];
    }
    
    public int getScore() {
