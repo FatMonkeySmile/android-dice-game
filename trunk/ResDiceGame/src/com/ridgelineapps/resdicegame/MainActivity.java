@@ -40,8 +40,8 @@ public class MainActivity extends Activity {
          finish();
          break;
       case R.id.restart:
-          new AlertDialog.Builder(game.gameView.activity).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Restart game")
-          .setMessage("Are you sure you want to restart?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+          new AlertDialog.Builder(game.gameView.activity).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Restart")
+          .setMessage("Are you sure you want to restart the game?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
               @Override
               public void onClick(DialogInterface dialog, int which) {
                   game.reset();
