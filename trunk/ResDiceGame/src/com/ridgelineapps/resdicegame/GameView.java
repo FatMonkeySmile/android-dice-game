@@ -235,8 +235,15 @@ public class GameView extends View {
       for(int i=1; i <= game.turnsTaken; i++) {
          int x = Scores.view[i][0];
          int y = Scores.view[i][1];
-         
-         String turnScore = "" + game.playsheet.getTurnScore(i);
+      
+         int turnScoreInt = game.playsheet.getTurnScore(i);
+         String turnScore;
+         if(turnScoreInt > 0) {
+            turnScore = "" + turnScoreInt;
+         }
+         else {
+            turnScore = "X";
+         }
          //TODO: Cache xOffset?
          int xOffset = (int) (scorePaint.measureText(turnScore) / 2);
          canvas.drawText(turnScore, x - xOffset, y, scorePaint);
