@@ -20,10 +20,8 @@ import java.util.ArrayList;
 
 //TODO: 
 //  Confirm "Use knight resource(s)"
-//  About screen
 //  Center vertically
 //  High score menu & toast when beating after 1st play
-//  Turn scores at top
 //  Remove java classes
 
 public class Game {
@@ -95,6 +93,7 @@ public class Game {
       
       if(!firstTurn) {
          turnsTaken++;
+         playsheet.scoreTurn(turnsTaken);
       }
       if(gameView != null)
          gameView.postInvalidate();      
