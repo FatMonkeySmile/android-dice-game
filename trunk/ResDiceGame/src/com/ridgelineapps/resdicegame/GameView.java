@@ -249,6 +249,17 @@ public class GameView extends View {
          canvas.drawText(turnScore, x - xOffset, y, scorePaint);
       }
       
+      if(!game.isGameDone()) {
+         int thisTurnScore = game.playsheet.getScore() - game.playsheet.getTurnScore(game.turnsTaken);
+         if(thisTurnScore > 0) {
+            int x = Scores.view[game.turnsTaken + 1][0];
+            int y = Scores.view[game.turnsTaken + 1][1];
+            String turnScore = "" + thisTurnScore;
+            int xOffset = (int) (scorePaint.measureText(turnScore) / 2);
+            canvas.drawText(turnScore, x - xOffset, y, scorePaint);
+         }
+      }
+      
       String score = "" + game.playsheet.getScore();
       int xOffset = (int) (scorePaint.measureText(score) / 2);
       canvas.drawText(score, scoreLoc.x - xOffset, scoreLoc.y, scorePaint);
