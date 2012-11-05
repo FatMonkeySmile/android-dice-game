@@ -65,9 +65,16 @@ public class UIDiceRoll extends UIEntity {
       else {
          text = "Done";
       }
-      canvas.drawPath(path, paint);
       int textWidth = (int) textPaint.measureText(text);
-      canvas.drawText(text, x + width / 2 - textWidth / 2, y + height - 15, textPaint);
+//      if(!game.isGameDone()) {
+          canvas.drawPath(path, paint);
+          canvas.drawText(text, x + width / 2 - textWidth / 2, y + height - 15, textPaint);
+//      }
+//      else {
+//          int offset = 80;
+//          canvas.drawRect(x, y - offset, x + width, y + height - offset, paint);
+//          canvas.drawText(text, x + width / 2 - textWidth / 2, y + height - 15 - offset, textPaint);
+//      }
       super.draw(canvas);      
    }
 }
