@@ -10,7 +10,6 @@ import java.util.ArrayList;
 //  Strings in resources
 //  High score menu & toast when beating after 1st play
 //  Turn scores at top
-//  Confirm "Play again"
 
 public class Game {
    Playsheet playsheet;
