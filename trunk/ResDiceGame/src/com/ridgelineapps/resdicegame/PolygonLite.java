@@ -21,12 +21,17 @@
  */
 package com.ridgelineapps.resdicegame;
 
-import android.graphics.Point;
+import android.graphics.Rect;
+
 
 public class PolygonLite {
    private int N;        // number of points in the polygon
    private PointLite[] a;    // the points, setting points[0] = points[N]
   
+   /////////////////////////////////////*
+   Rect rect;
+   /////////////////////////////////////*
+   
    public PolygonLite() {
        N = 0;
        a = new PointLite[16];
@@ -62,7 +67,11 @@ public class PolygonLite {
    // does this Polygon contain the point p?
    // if p is on boundary then 0 or 1 is returned, and p is in exactly one point of every partition of plane
    // Reference: http://exaflop.org/docs/cgafaq/cga2.html
-   public boolean contains2(Point p) {
+   public boolean contains(PointLite p) {
+      if(!quickContains(p)) {
+         return false;
+      }
+      
        int crossings = 0;
        for (int i = 0; i < N; i++) {
            int j = i + 1;
@@ -80,7 +89,11 @@ public class PolygonLite {
 
    // does this Polygon contain the point p?
    // Reference: http://softsurfer.com/Archive/algorithm_0103/algorithm_0103.htm
-   public boolean contains(PointLite p) {
+   public boolean contains2(PointLite p) {
+      if(!quickContains(p)) {
+         return false;
+      }
+      
        int winding = 0;
        for (int i = 0; i < N; i++) {
            int ccw = PointLite.ccw(a[i], a[i+1], p);
@@ -91,4 +104,42 @@ public class PolygonLite {
        }
        return winding != 0;
    }   
+   
+   /////////////////////////////////////*
+   public boolean quickContains(PointLite p) {
+      if(a == null || a.length == 0) {
+         return false;
+      }
+      
+      if(rect == null) {
+          int x1 = a[0].x;
+          int y1 = a[0].y;
+          int x2 = a[0].x;
+          int y2 = a[0].y;
+          
+          for(int i=1;i < N; i++) {
+              if(a[i].x < x1) {
+                  x1 = a[i].x;
+              }
+              if(a[i].x > x2) {
+                  x2 = a[i].x;
+              }
+              if(a[i].y < y1) {
+                  y1 = a[i].y;
+              }
+              if(a[i].y > y2) {
+                  y2 = a[i].y;
+              }
+          }
+          
+          rect = new Rect(x1, y1, x2, y2);
+      }
+      
+      if(!rect.contains((int)p.x, (int)p.y)) {
+          return false;
+      }
+      
+      return true;
+   }
+   /////////////////////////////////////*
 }
