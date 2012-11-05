@@ -35,7 +35,7 @@ public class UIDice extends UIEntity {
       paint.setAntiAlias(true);
       
       holdPaint = new Paint();
-      holdPaint.setARGB(100, 180, 165, 100);
+      holdPaint.setARGB(140, 80, 65, 0);
       holdPaint.setStyle(Style.FILL);
       
       path = new Path();

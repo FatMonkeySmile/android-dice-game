@@ -33,11 +33,6 @@ public class MainActivity extends Activity {
     }
     
    @Override
-   public void onBackPressed() {
-      game.roll();
-   }
-
-   @Override
    public boolean onOptionsItemSelected(MenuItem item) {
       switch (item.getItemId()) {
       case R.id.quit:
