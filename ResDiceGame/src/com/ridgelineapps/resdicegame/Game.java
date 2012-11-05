@@ -40,6 +40,10 @@ public class Game {
       newTurn(true);
    }
    
+   public String getString(int id) {
+      return gameView.activity.getResources().getString(id);
+   }
+   
    public void setGameView(GameView gameView) {
       this.gameView = gameView;
    }

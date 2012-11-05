@@ -79,14 +79,14 @@ public class UIEntity {
             break;
          case roll:
             if (game.isGameDone()) {
-                new AlertDialog.Builder(game.gameView.activity).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Play again")
-                    .setMessage("Are you sure you want to restart the game?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(game.gameView.activity).setIcon(android.R.drawable.ic_dialog_alert).setTitle(game.getString(R.string.play_again))
+                    .setMessage(game.getString(R.string.restart_text)).setPositiveButton(game.getString(R.string.yes), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             game.roll();
                         }
 
-                    }).setNegativeButton("No", null).show();
+                    }).setNegativeButton(game.getString(R.string.no), null).show();
             }
             else {
                 game.roll();

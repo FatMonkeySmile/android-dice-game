@@ -45,25 +45,22 @@ public class UIDiceRoll extends UIEntity {
    public void draw(Canvas canvas) {
       String text;
       if(game.canRoll()) {
-         text = "Roll";
+         text = "";
         if (game.rolls == 0) {
-            text = "1st " + text;
+            text = game.getString(R.string.first_roll);
         }
         if (game.rolls == 1) {
-            text = "2nd " + text;
+            text = game.getString(R.string.second_roll);
         }
         if (game.rolls == 2) {
-            text = "3rd " + text;
+            text = game.getString(R.string.third_roll);
         }
-            //         if(game.rolls > 0) {
-//            text += " (" + game.rolls + ")";
-//         }
       }
       else if(game.isGameDone()) {
-          text = "Play again";
+          text = game.getString(R.string.play_again);
       }
       else {
-         text = "Done";
+         text = game.getString(R.string.done);
       }
       int textWidth = (int) textPaint.measureText(text);
 //      if(!game.isGameDone()) {
