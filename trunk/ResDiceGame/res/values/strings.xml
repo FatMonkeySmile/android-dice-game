@@ -11,4 +11,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="quit">Quit</string>
+    <string name="about_title">About Catan Dice Game</string>
+    <string name="about_ok">   Back   </string>
+    <string name="about_menu">About</string>
 </resources>
