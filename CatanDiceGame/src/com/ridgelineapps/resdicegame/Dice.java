@@ -1,4 +1,4 @@
-package com.ridgelineapps.dicegame;
+package com.ridgelineapps.resdicegame;
 
 public class Dice {
    enum Value {

@@ -1,18 +1,12 @@
-package com.ridgelineapps.dicegame;
-
-import com.ridgelineapps.dicegame.R;
+package com.ridgelineapps.resdicegame;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
    

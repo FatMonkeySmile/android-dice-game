@@ -1,4 +1,4 @@
-package com.ridgelineapps.dicegame;
+package com.ridgelineapps.resdicegame;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,6 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.ridgelineapps.dicegame.R;
 import com.ridgelineapps.dicegame.java.Polygon;
 import com.ridgelineapps.dicegame.mappings.Cities;
 import com.ridgelineapps.dicegame.mappings.Knights;

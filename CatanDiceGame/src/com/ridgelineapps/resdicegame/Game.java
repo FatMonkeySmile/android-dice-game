@@ -1,4 +1,4 @@
-package com.ridgelineapps.dicegame;
+package com.ridgelineapps.resdicegame;
 
 import java.util.ArrayList;
 

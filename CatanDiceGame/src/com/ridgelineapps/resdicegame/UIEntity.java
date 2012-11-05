@@ -1,4 +1,4 @@
-package com.ridgelineapps.dicegame;
+package com.ridgelineapps.resdicegame;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
