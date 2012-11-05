@@ -3,6 +3,12 @@
     package="com.ridgelineapps.resdicegame"
     android:versionCode="1"
     android:versionName="1.0" >
+    
+    <supports-screens 
+        android:smallScreens="false"
+        android:normalScreens="false"
+        android:largeScreens="true"/>
+    
 
     <uses-sdk android:minSdkVersion="8" />
 
