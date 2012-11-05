@@ -10,6 +10,8 @@ import java.util.ArrayList;
 //  Strings in resources
 //  High score menu & toast when beating after 1st play
 //  Turn scores at top
+//  Remove java classes
+//  e-mail illus.
 
 public class Game {
    Playsheet playsheet;
