@@ -29,6 +29,7 @@ public class PolygonLite {
    private PointLite[] a;    // the points, setting points[0] = points[N]
   
    /////////////////////////////////////*
+   // Added by Resource Dice Game
    Rect rect;
    /////////////////////////////////////*
    
@@ -106,6 +107,7 @@ public class PolygonLite {
    }   
    
    /////////////////////////////////////*
+   // Added by Resource Dice Game
    public boolean quickContains(PointLite p) {
       if(a == null || a.length == 0) {
          return false;
