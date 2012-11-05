@@ -7,8 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 
-import com.ridgelineapps.dicegame.java.Polygon;
-
 public class UIEntity {
    enum Type {
       dice,
@@ -28,7 +26,7 @@ public class UIEntity {
    
    Game game;
    
-   Polygon poly;
+   PolygonLite poly;
    Path path;
    
    Type type;
@@ -44,7 +42,7 @@ public class UIEntity {
       this.y2 = Math.max(y1, y2);
    }
    
-   public UIEntity(Game game, Type type, int index, Polygon poly, Path path) {
+   public UIEntity(Game game, Type type, int index, PolygonLite poly, Path path) {
       this.type = type;
       this.game = game;
       this.index = index;
@@ -60,7 +58,7 @@ public class UIEntity {
          return false;
       }
       else {
-         return poly.contains(x, y);
+         return poly.contains(new PointLite(x, y));
       }
    }
    
