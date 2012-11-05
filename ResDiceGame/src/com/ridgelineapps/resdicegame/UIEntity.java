@@ -89,7 +89,7 @@ public class UIEntity {
    public void up() {
       switch (type) {
          case dice:
-            game.holdDice(index);
+            game.diceTouched(index);
             break;
          case roll:
             if (game.isGameDone()) {

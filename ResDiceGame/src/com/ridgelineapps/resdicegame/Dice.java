@@ -31,7 +31,6 @@ public class Dice {
    Value value;
    boolean held;
    boolean used;
-   int rollHeld;
    
    public Dice() {
       reset();
@@ -65,9 +64,8 @@ public class Dice {
       return held;
    }
    
-   public void hold(int roll) {
-      held = true;
-      rollHeld = roll;
+   public void hold(int roll, boolean b) {
+      held = b;
    }
    
    public boolean isUsable() {

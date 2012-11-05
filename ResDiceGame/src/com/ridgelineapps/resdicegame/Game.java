@@ -112,17 +112,12 @@ public class Game {
           gameView.postInvalidate();      
    }
    
-   public void holdDice(int i) {
+   public void diceTouched(int i) {
       if(rolls == 0 || i < 0 || i >= dice.length) {
          return;
       }
       
-      if(dice[i].held && dice[i].rollHeld == rolls) {
-          dice[i].held = false;
-      }
-      else if(!dice[i].held){
-          dice[i].hold(rolls);
-      }
+      dice[i].hold(rolls, !dice[i].isHeld());
       if(gameView != null)
           gameView.postInvalidate();      
    }
