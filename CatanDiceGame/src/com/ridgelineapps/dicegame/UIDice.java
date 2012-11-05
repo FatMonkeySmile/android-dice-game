@@ -42,7 +42,7 @@ public class UIDice extends UIEntity {
       holdPaint.setStyle(Style.FILL);
       
       holdBorderPaint = new Paint();
-      holdBorderPaint.setARGB(255, 155, 145, 70);
+      holdBorderPaint.setARGB(255, 135, 125, 55);
       holdBorderPaint.setAntiAlias(true);
       holdBorderPaint.setStyle(Style.FILL_AND_STROKE);
       holdBorderPaint.setStrokeWidth(4);

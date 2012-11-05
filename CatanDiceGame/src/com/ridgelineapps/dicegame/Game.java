@@ -3,18 +3,14 @@ package com.ridgelineapps.dicegame;
 import java.util.ArrayList;
 
 //TODO: 
-//  new package name (resdicegame?)
 //  copyrights/gpl
-//  Add quick rect check for isWithin()
-//  All colors better
-//  Icon
 //  Confirm "Use knight resource(s)"
 //  About screen
 //  Center vertically
 //  Strings in resources
 //  High score menu & toast when beating after 1st play
-//  fix dice bitmaps
 //  Turn scores at top
+//  Confirm "Play again"
 
 public class Game {
    Playsheet playsheet;
