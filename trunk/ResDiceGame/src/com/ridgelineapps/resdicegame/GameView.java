@@ -249,7 +249,7 @@ public class GameView extends View {
          canvas.drawText(turnScore, x - xOffset, y, scorePaint);
       }
       
-      if(!game.isGameDone()) {
+      if(!game.isGameDone() && game.turnsTaken < 15) {
          int thisTurnScore = game.playsheet.getScore() - game.playsheet.getTurnScore(game.turnsTaken);
          if(thisTurnScore > 0) {
             int x = Scores.view[game.turnsTaken + 1][0];
