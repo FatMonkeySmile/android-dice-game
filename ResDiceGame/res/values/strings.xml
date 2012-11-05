@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Catan Dice Game</string>
+    <string name="first_roll">1st Roll</string>
+    <string name="second_roll">2nd Roll</string>
+    <string name="third_roll">3rd Roll</string>
+    <string name="play_again">Play again</string>
+    <string name="done">Done</string>
+    <string name="restart_title">Restart</string>
+    <string name="restart_text">Are you sure you want to restart the game?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="quit">Quit</string>
 </resources>
