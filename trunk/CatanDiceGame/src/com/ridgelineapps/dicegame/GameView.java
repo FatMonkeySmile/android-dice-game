@@ -35,6 +35,7 @@ public class GameView extends View {
    Paint imagePaint;
    Paint borderPaint;
    Paint scorePaint;
+   Paint backPaint;
    
    MainActivity activity;
    
@@ -59,6 +60,10 @@ public class GameView extends View {
       scorePaint.setAntiAlias(true);
       scorePaint.setARGB(255, 0, 10, 10);
       scorePaint.setTextSize(23);
+      
+      backPaint = new Paint();
+      backPaint.setStyle(Style.FILL);
+      backPaint.setARGB(255, 25, 25, 25);
       
       borderPaint = new Paint();
       borderPaint.setStyle(Style.STROKE);
@@ -198,6 +203,8 @@ public class GameView extends View {
 
    @Override
    protected void onDraw(Canvas canvas) {
+      canvas.drawRect(0, 0, width, height, backPaint); 
+       
       float scale = (float) playSheetImage.getScaledWidth(canvas) / 480;
       Rect src = new Rect(0, 0, (int) (width * scale), (int) (height * scale));
       Rect dest = new Rect(0, 0, width, height); //canvas.getWidth(), canvas.getHeight());
@@ -214,9 +221,10 @@ public class GameView extends View {
       canvas.drawRect(0, 0, width - 1, height - 1, borderPaint);
       
       if(!game.isGameDone()) {
-          String turn = "" + (game.turnsTaken + 1);
+////         String turn = "" + (game.turnsTaken + 1);
+          String turn = "Turn:  " + (game.turnsTaken + 1);
           xOffset = (int) (scorePaint.measureText(turn) / 2);
-          canvas.drawText(turn, 449 - xOffset, 38, scorePaint);
+          canvas.drawText(turn, 334, 38, scorePaint);
       }
    }
    

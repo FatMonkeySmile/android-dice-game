@@ -5,9 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Rect;
-import android.graphics.Paint.Style;
+import android.graphics.RectF;
 
 public class UIDice extends UIEntity {
    public static final int size = 65;
@@ -22,6 +23,8 @@ public class UIDice extends UIEntity {
    static Bitmap gold;
    Paint paint;
    Paint holdPaint;
+   Paint holdBorderPaint;
+   Paint backPaint;
    
    public UIDice(Game game, int index, int x, int y) {
       super(game, Type.dice, index, x, y, x + size, y + size);
@@ -37,6 +40,17 @@ public class UIDice extends UIEntity {
       holdPaint = new Paint();
       holdPaint.setARGB(140, 80, 65, 0);
       holdPaint.setStyle(Style.FILL);
+      
+      holdBorderPaint = new Paint();
+      holdBorderPaint.setARGB(255, 155, 145, 70);
+      holdBorderPaint.setAntiAlias(true);
+      holdBorderPaint.setStyle(Style.FILL_AND_STROKE);
+      holdBorderPaint.setStrokeWidth(4);
+      
+      backPaint = new Paint();
+      backPaint.setARGB(255, 225, 215, 140);
+      backPaint.setAntiAlias(true);
+      backPaint.setStyle(Style.FILL);
       
       path = new Path();
       path.moveTo(x, y);
@@ -80,15 +94,15 @@ public class UIDice extends UIEntity {
                break;
          }
          if(bitmap != null) {
+            if(dice.isHeld() || !game.canRoll()) {
+                RectF rect = new RectF(x - 1, y - 1, x + size + 1, y + size + 1);
+                canvas.drawRoundRect(rect, 7, 7, holdBorderPaint);
+            }
+            RectF rect = new RectF(x + 3, y + 3, x + size - 3, y + size - 3);
+            canvas.drawRoundRect(rect, 7, 7, backPaint);
             Rect src = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
             Rect dest = new Rect(x, y, x + size, y + size);
             canvas.drawBitmap(bitmap, src, dest, paint);
-//            canvas.drawBitmap(bitmap, x, y, paint);
-            
-//            if(dice.isHeld() || !game.canRoll()) {
-            if(dice.isHeld() && game.canRoll()) {
-                canvas.drawRect(x, y, x + size, y + size, holdPaint);
-            }
          }
       }
       super.draw(canvas);
