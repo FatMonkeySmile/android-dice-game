@@ -1,9 +1,11 @@
 package com.ridgelineapps.dicegame;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
 
 import com.ridgelineapps.dicegame.java.Polygon;
 
@@ -76,7 +78,19 @@ public class UIEntity {
             game.holdDice(index);
             break;
          case roll:
-            game.roll();
+            if (game.isGameDone()) {
+                new AlertDialog.Builder(game.gameView.activity).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Play again")
+                    .setMessage("Are you sure you want to restart?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            game.roll();
+                        }
+
+                    }).setNegativeButton("No", null).show();
+            }
+            else {
+                game.roll();
+            }
             break;
 //         case turnOver:
 //            game.newTurn(false);

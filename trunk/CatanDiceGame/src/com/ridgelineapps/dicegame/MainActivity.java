@@ -3,6 +3,8 @@ package com.ridgelineapps.dicegame;
 import com.ridgelineapps.dicegame.R;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.Menu;
@@ -39,8 +41,14 @@ public class MainActivity extends Activity {
          finish();
          break;
       case R.id.restart:
-         //TODO: confirm restart
-         game.reset();
+          new AlertDialog.Builder(game.gameView.activity).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Restart game")
+          .setMessage("Are you sure you want to restart?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+                  game.reset();
+              }
+
+          }).setNegativeButton("No", null).show();
          break;
       }
       return true;
