@@ -14,6 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+/*
+ * Originally from http://algs4.cs.princeton.edu/91primitives/ 
+ * 
+ * Copyright (C) 2007, Robert Sedgewick and Kevin Wayne.
+ */
 package com.ridgelineapps.resdicegame;
 
 import android.graphics.Point;
