@@ -210,6 +210,8 @@ public class GameView extends View {
       
       canvas.drawBitmap(playSheetImage, src, dest, imagePaint);
       
+//      canvas.drawBitmap(playSheetImage, 0, 0, imagePaint);
+      
       for(UIEntity e : entities) {
          e.draw(canvas);
       }
