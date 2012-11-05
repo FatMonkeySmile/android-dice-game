@@ -2,8 +2,8 @@ package com.ridgelineapps.resdicegame;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
 
 public class UIDiceRoll extends UIEntity {
    int x;

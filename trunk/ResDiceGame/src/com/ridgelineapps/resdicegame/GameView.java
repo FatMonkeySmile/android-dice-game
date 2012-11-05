@@ -7,14 +7,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.ridgelineapps.dicegame.java.Polygon;
 import com.ridgelineapps.dicegame.mappings.Cities;
 import com.ridgelineapps.dicegame.mappings.Knights;
 import com.ridgelineapps.dicegame.mappings.Resources;
@@ -81,16 +80,16 @@ public class GameView extends View {
       diceY += UIDice.size + rollOffsetY;
       entities.add(new UIDiceRoll(game, rollOffsetX, diceY, width - rollOffsetX * 2, height - rollOffsetY - diceY));
       
-      Polygon poly;
+      PolygonLite poly;
       Path path;
 
       for(int i=0; i < Roads.touch.length; i++) {
-         poly = new Polygon();
+         poly = new PolygonLite();
          path = new Path();
          for(int j = 0; j < Roads.touch[i].length; j++) {
             int x = Roads.touch[i][j][0];
             int y = Roads.touch[i][j][1];
-            poly.addPoint(x, y);
+            poly.add(new PointLite(x, y));
          }
          for(int j = 0; j < Roads.view[i].length; j++) {
             int x = Roads.view[i][j][0];
@@ -108,12 +107,12 @@ public class GameView extends View {
       }
       
       for(int i=0; i < Villages.touch.length; i++) {
-         poly = new Polygon();
+         poly = new PolygonLite();
          path = new Path();
          for(int j = 0; j < Villages.touch[i].length; j++) {
             int x = Villages.touch[i][j][0];
             int y = Villages.touch[i][j][1];
-            poly.addPoint(x, y);
+            poly.add(new PointLite(x, y));
          }
          for(int j = 0; j < Villages.view[i].length; j++) {
             int x = Villages.view[i][j][0];
@@ -131,12 +130,12 @@ public class GameView extends View {
       }
       
       for(int i=0; i < Cities.touch.length; i++) {
-         poly = new Polygon();
+         poly = new PolygonLite();
          path = new Path();
          for(int j = 0; j < Cities.touch[i].length; j++) {
             int x = Cities.touch[i][j][0];
             int y = Cities.touch[i][j][1];
-            poly.addPoint(x, y);
+            poly.add(new PointLite(x, y));
          }
          for(int j = 0; j < Cities.view[i].length; j++) {
             int x = Cities.view[i][j][0];
@@ -154,12 +153,12 @@ public class GameView extends View {
       }
       
       for(int i=0; i < Resources.touch.length; i++) {
-         poly = new Polygon();
+         poly = new PolygonLite();
          path = new Path();
          for(int j = 0; j < Resources.touch[i].length; j++) {
             int x = Resources.touch[i][j][0];
             int y = Resources.touch[i][j][1];
-            poly.addPoint(x, y);
+            poly.add(new PointLite(x, y));
          }
          for(int j = 0; j < Resources.view[i].length; j++) {
             int x = Resources.view[i][j][0];
@@ -177,12 +176,12 @@ public class GameView extends View {
       }
 
       for(int i=0; i < Knights.touch.length; i++) {
-         poly = new Polygon();
+         poly = new PolygonLite();
          path = new Path();
          for(int j = 0; j < Knights.touch[i].length; j++) {
             int x = Knights.touch[i][j][0];
             int y = Knights.touch[i][j][1];
-            poly.addPoint(x, y);
+            poly.add(new PointLite(x, y));
          }
          for(int j = 0; j < Knights.view[i].length; j++) {
             int x = Knights.view[i][j][0];
