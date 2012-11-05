@@ -179,7 +179,8 @@ public class UIEntity {
    }
    
    public void highlight(Paint p) {
-       p.setARGB(128, 20, 200, 75);
+       p.setARGB(100, 35, 180, 15);
+//       p.setARGB(128, 20, 200, 75);
    }
    
    public void darken(Paint p) {
