@@ -250,7 +250,7 @@ public class GameView extends View {
       }
       
       if(!game.isGameDone() && game.turnsTaken < 15) {
-         int thisTurnScore = game.playsheet.getScore() - game.playsheet.getTurnScore(game.turnsTaken);
+         int thisTurnScore = game.playsheet.getScore() - game.playsheet.turnScore[game.turnsTaken];
          if(thisTurnScore > 0) {
             int x = Scores.view[game.turnsTaken + 1][0];
             int y = Scores.view[game.turnsTaken + 1][1];
