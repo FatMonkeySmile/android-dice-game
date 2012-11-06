@@ -3,6 +3,6 @@
         android:title="@string/quit" />
     <item android:id="@+id/restart"
         android:title="@string/restart_title" />
-    <item android:id="@+id/about"
-        android:title="@string/about_menu" />
+    <!-- item android:id="@+id/about"
+        android:title="@string/about_menu" / -->
 </menu>
