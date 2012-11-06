@@ -409,7 +409,7 @@ public class Game {
          }
       }
       
-      if(unfound > 2 * gold) {
+      if(unfound > gold / 2) {
           return false;
       }
       return true;
