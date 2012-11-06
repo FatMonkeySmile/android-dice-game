@@ -22,7 +22,6 @@ import java.util.ArrayList;
 //  Confirm "Use knight resource(s)"
 //  Center vertically
 //  High score menu & toast when beating after 1st play
-//  Remove java classes
 
 public class Game {
    Playsheet playsheet;
@@ -261,12 +260,24 @@ public class Game {
    }
    
    public void useResources(Dice.Value[] resources) {
+      // TODO: Cleanup how knightResources are tracked
+      knightResources.clear();
+      for(int i=1; i <= 6; i++) {
+          if(canUseKnightResource(i)) {
+              knightResources.add(playsheet.getKnightResource(i));
+          }
+      }
+      
       int gold = 0;
       for(Dice die : dice) {
          if(die.isUsable() && die.getValue().equals(Dice.Value.Gold)) {
             gold++;
          }
-      }         
+      } 
+      
+      if(gold % 2 != 0) {
+         gold--;
+      }
       
       ArrayList<Dice.Value> resList = new ArrayList<Dice.Value>();
       for(Dice.Value val : resources) {
@@ -274,83 +285,82 @@ public class Game {
       }
       
       for(Dice.Value val : resources) {
-         boolean found = false;
          for(int i=0; i < dice.length; i++) {
-            if(!dice[i].isUsable()) {
-               continue;
-            }
-            if(dice[i].value.equals(val)) {
+            if(dice[i].isUsable() && dice[i].value.equals(val)) {
                dice[i].use();
-               found = true;
                resList.remove(val);
                break;
             }
          }
       }
-         
-      int unfound = 0;
+      
+      ArrayList<Dice.Value> resListFound = new ArrayList<Dice.Value>();
+       
       for(Dice.Value val : resList) {
-          boolean found = false;
           for(int i = knightResources.size() - 1; i >=0 ; i--) {
              if(knightResources.get(i).equals(val)) {
-                found = true;
+                resListFound.add(val);
                 break;
              }
           }
-            
-          if(!found) {
-              unfound++;
-          }
       }
       
-      if(gold / 2 > unfound) {
+      for(Dice.Value val : resListFound) {
+         resList.remove(val);
       }
-         
-         boolean found = false;
-        if(!found) {
-          if(gold >= 2) {
-            found = true;
-            int goldNeeded = 2;
-            for(int i=0; i < dice.length; i++) {
-               if(dice[i].isUsable() && dice[i].value.equals(Dice.Value.Gold)) {
-                  dice[i].use();
-                  if(--goldNeeded == 0) {
-                     break;
-                  }
-               }
-            }
-          }
-        }
+      
+      int goldUsed = 0;
+      boolean useWildcardResource = false;
+      
+      if(gold / 2 == resList.size()) {
+         goldUsed = gold;
+      }   
+      else if(gold / 2 > resList.size()) {
+         goldUsed = resList.size() * 2;
+         for(int i=0; i < gold / 2 - resList.size() && resListFound.size() > 0; i++) {
+            resListFound.remove(0);
+            goldUsed += 2;
+         }
+      }
+      else if(gold / 2 < resList.size()) {
+         useWildcardResource = true;
+         goldUsed = gold;
+      }
+
+      
+      for(int i=0; i < dice.length && goldUsed > 0; i++) {
+         if(dice[i].isUsable() && dice[i].value.equals(Dice.Value.Gold)) {
+            dice[i].use();
+            goldUsed--;
+         }
+      }
             
-//        if(!found) {
-//           for(int i = knightResources.size() - 1; i >=0 ; i--) {
-//              if(knightResources.get(i).equals(val)) {
-//                 int index = getKnightResourceIndex(knightResources.get(i));
-//                 playsheet.useKnightResource(index);
-//                 knightResources.remove(i);
-//                 found = true;
-//                 break;
-//              }
-//           }            
-//        }
-//        if(!found) {
-//            for(int i = knightResources.size() - 1; i >=0 ; i--) {
-//                if(knightResources.get(i).equals(Dice.Value.Any)) {
-//                    int index = getKnightResourceIndex(knightResources.get(i));
-//                    playsheet.useKnightResource(index);
-//                    knightResources.remove(i);
-//                    found = true;
-//                    break;
-//                 }
-//            }            
-//         }
-         
+      for(Dice.Value val : resListFound) {
+         for(int i = knightResources.size() - 1; i >=0 ; i--) {
+            if(knightResources.get(i).equals(val)) {
+               int index = getKnightResourceIndex(knightResources.get(i));
+               playsheet.useKnightResource(index);
+               knightResources.remove(i);
+               break;
+            }
+         }            
+      }
+      if(useWildcardResource) {
+          for(int i = knightResources.size() - 1; i >=0 ; i--) {
+              if(knightResources.get(i).equals(Dice.Value.Any)) {
+                  int index = getKnightResourceIndex(knightResources.get(i));
+                  playsheet.useKnightResource(index);
+                  knightResources.remove(i);
+                  break;
+              }
+          }            
       }
    }
 
    public boolean canBuild(Dice.Value[] resourcesRequired) {
       boolean[] diceUsed = new boolean[dice.length];
       
+      // TODO: Cleanup how knightResources are tracked
       knightResources.clear();
       for(int i=1; i <= 6; i++) {
           if(canUseKnightResource(i)) {
@@ -369,10 +379,7 @@ public class Game {
       for(Dice.Value val : resourcesRequired) {
          boolean found = false;
          for(int i=0; i < dice.length; i++) {
-            if(!dice[i].isUsable() || diceUsed[i]) {
-               continue;
-            }
-            if(dice[i].value.equals(val)) {
+            if(dice[i].isUsable() && !diceUsed[i] && dice[i].value.equals(val)) {
                diceUsed[i] = true;
                found = true;
                break;
@@ -380,10 +387,7 @@ public class Game {
          }
          if(!found) {
             for(int i=0; i < knightResources.size(); i++) {
-               if(knightResourcesUsed[i]) {
-                  continue;
-               }
-               if(knightResources.get(i).equals(val)) {
+               if(!knightResourcesUsed[i] && knightResources.get(i).equals(val)) {
                   knightResourcesUsed[i] = true;
                   found = true;
                   break;
@@ -392,10 +396,7 @@ public class Game {
          }
          if(!found) {
              for(int i=0; i < knightResources.size(); i++) {
-                if(knightResourcesUsed[i]) {
-                   continue;
-                }
-                if(knightResources.get(i).equals(Dice.Value.Any)) {
+                if(!knightResourcesUsed[i] && knightResources.get(i).equals(Dice.Value.Any)) {
                    knightResourcesUsed[i] = true;
                    found = true;
                    break;
