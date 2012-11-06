@@ -86,7 +86,7 @@ public class UIEntity {
       return path;
    }
    
-   public void up() {
+   public void touch() {
       switch (type) {
          case dice:
             game.diceTouched(index);

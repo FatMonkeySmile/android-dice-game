@@ -66,10 +66,10 @@ public class MainActivity extends Activity {
 
           }).setNegativeButton(getResources().getString(R.string.no), null).show();
          break;
-      case R.id.about:
-         Intent i = new Intent(MainActivity.this, About.class);
-         startActivity(i);
-         break;
+//      case R.id.about:
+//         Intent i = new Intent(MainActivity.this, About.class);
+//         startActivity(i);
+//         break;
       }
       return true;
    }
