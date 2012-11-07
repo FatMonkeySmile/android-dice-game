@@ -16,10 +16,13 @@
  */
 package com.ridgelineapps.resdicegame;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import android.view.MotionEvent;
 
 public class UIDiceRoll extends UIEntity {
    int x;
@@ -27,7 +30,9 @@ public class UIDiceRoll extends UIEntity {
    int width;
    int height;
    Paint paint;
+   Paint touchPaint;
    Paint textPaint;
+   boolean down = false;
    
    public UIDiceRoll(Game game, int x, int y, int width, int height) {
       super(game, Type.roll, 0, x, y, x + width, y + height);
@@ -37,11 +42,18 @@ public class UIDiceRoll extends UIEntity {
       this.height = height;
       
       paint = new Paint();
-      paint.setDither(true);
-      paint.setFilterBitmap(true);
-      paint.setAntiAlias(true);
+//      paint.setDither(true);
+//      paint.setFilterBitmap(true);
+//      paint.setAntiAlias(true);
       paint.setStyle(Style.FILL);
       paint.setARGB(255, 50, 80, 120);         
+      
+      touchPaint = new Paint();
+//      touchPaint.setDither(true);
+//      touchPaint.setFilterBitmap(true);
+//      touchPaint.setAntiAlias(true);
+      touchPaint.setStyle(Style.FILL);
+      touchPaint.setARGB(255, 120, 150, 190);
       
       textPaint = new Paint();
       textPaint.setFakeBoldText(true);
@@ -55,6 +67,35 @@ public class UIDiceRoll extends UIEntity {
       path.lineTo(x + width, y + height);
       path.lineTo(x, y + height);
       path.close();      
+   }
+   
+   @Override
+   public void touch(int action) {
+       if(action == MotionEvent.ACTION_DOWN) {
+           down = true;
+           game.gameView.postInvalidate();
+       }
+       else if(down && action == MotionEvent.ACTION_UP) {
+           down = false;
+           if (game.isGameDone()) {
+               game.gameView.postInvalidate();
+               new AlertDialog.Builder(game.gameView.activity).setIcon(android.R.drawable.ic_dialog_alert).setTitle(game.getString(R.string.play_again))
+                   .setMessage(game.getString(R.string.restart_text)).setPositiveButton(game.getString(R.string.yes), new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialog, int which) {
+                           game.roll();
+                       }
+
+                   }).setNegativeButton(game.getString(R.string.no), null).show();
+           }
+           else {
+               game.roll();
+           }
+       }
+       else if(action == MotionEvent.ACTION_CANCEL) {
+           down = false;
+           game.gameView.postInvalidate();
+       }
    }
    
    @Override
@@ -80,7 +121,12 @@ public class UIDiceRoll extends UIEntity {
       }
       int textWidth = (int) textPaint.measureText(text);
 //      if(!game.isGameDone()) {
-          canvas.drawPath(path, paint);
+      if(down) {
+          canvas.drawPath(path, touchPaint);
+      }
+      else {
+          canvas.drawPath(path, paint);          
+      }
           canvas.drawText(text, x + width / 2 - textWidth / 2, y + height - 15, textPaint);
 //      }
 //      else {

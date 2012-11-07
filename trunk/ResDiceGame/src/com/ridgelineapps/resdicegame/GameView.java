@@ -51,6 +51,7 @@ public class GameView extends View {
    Paint borderPaint;
    Paint scorePaint;
    Paint backPaint;
+   UIDiceRoll uiDiceRoll;
    
    MainActivity activity;
    
@@ -95,7 +96,8 @@ public class GameView extends View {
       }
       
       diceY += UIDice.size + rollOffsetY;
-      entities.add(new UIDiceRoll(game, rollOffsetX, diceY, width - rollOffsetX * 2, height - rollOffsetY - diceY));
+      uiDiceRoll = new UIDiceRoll(game, rollOffsetX, diceY, width - rollOffsetX * 2, height - rollOffsetY - diceY);
+      entities.add(uiDiceRoll);
       
       PolygonLite poly;
       Path path;
@@ -275,20 +277,20 @@ public class GameView extends View {
    @Override
    public boolean onTouchEvent(MotionEvent event) {
 
-       if(event.getAction() == MotionEvent.ACTION_DOWN) {
+       if(uiDiceRoll.down && event.getAction() == MotionEvent.ACTION_MOVE) {
+           if(!uiDiceRoll.isWithin((int) event.getX(), (int) event.getY())) {
+               uiDiceRoll.down = false;
+               postInvalidate();
+           }
+       }
+       
+       if(event.getAction() != MotionEvent.ACTION_MOVE) {
            for(UIEntity e : entities) {
-              if((e instanceof UIDice) && e.isWithin((int) event.getX(), (int) event.getY())) {
-                 e.touch();
+              if(e.isWithin((int) event.getX(), (int) event.getY())) {
+                 e.touch(event.getAction());
               }
            }
         }
-      if(event.getAction() == MotionEvent.ACTION_UP) {
-         for(UIEntity e : entities) {
-            if(!(e instanceof UIDice) && e.isWithin((int) event.getX(), (int) event.getY())) {
-               e.touch();
-            }
-         }
-      }
       
       return true;
    }

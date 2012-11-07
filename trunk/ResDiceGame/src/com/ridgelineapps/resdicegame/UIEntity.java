@@ -22,6 +22,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import android.view.MotionEvent;
 
 public class UIEntity {
    enum Type {
@@ -86,40 +87,39 @@ public class UIEntity {
       return path;
    }
    
-   public void touch() {
+   public void touch(int action) {
+       if(action != MotionEvent.ACTION_DOWN && action != MotionEvent.ACTION_UP) {
+           return;
+       }
+       
       switch (type) {
          case dice:
-            game.diceTouched(index);
-            break;
-         case roll:
-            if (game.isGameDone()) {
-                new AlertDialog.Builder(game.gameView.activity).setIcon(android.R.drawable.ic_dialog_alert).setTitle(game.getString(R.string.play_again))
-                    .setMessage(game.getString(R.string.restart_text)).setPositiveButton(game.getString(R.string.yes), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            game.roll();
-                        }
-
-                    }).setNegativeButton(game.getString(R.string.no), null).show();
-            }
-            else {
-                game.roll();
+            if(action == MotionEvent.ACTION_DOWN) {
+                game.diceTouched(index);
             }
             break;
 //         case turnOver:
 //            game.newTurn(false);
 //            break;
          case road:
-            game.buildRoad(index);
+             if(action == MotionEvent.ACTION_UP) {
+                 game.buildRoad(index);
+             }
             break;
          case village:
-            game.buildVillage(index);
+             if(action == MotionEvent.ACTION_UP) {
+                 game.buildVillage(index);
+             }
             break;
          case city:
-            game.buildCity(index);
+             if(action == MotionEvent.ACTION_UP) {
+                 game.buildCity(index);
+             }
             break;
          case knight:
-            game.buildKnight(index);
+             if(action == MotionEvent.ACTION_UP) {
+                 game.buildKnight(index);
+             }
             break;
          case resource:
 //            game.consumeKnightResource(index);
