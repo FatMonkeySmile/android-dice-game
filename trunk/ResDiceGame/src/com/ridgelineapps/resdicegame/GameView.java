@@ -232,16 +232,19 @@ public class GameView extends View {
          }
          else if(xScale < yScale) {
             scale = xScale;
+            yOffset = (int ) (canvas.getHeight() - height * scale) / 2;
          }
          else {
             scale = yScale;
+            xOffset = (int) (canvas.getWidth() - width * scale) / 2;
          }
       }
       
       canvas.save();
       Matrix matrix = new Matrix();
-      matrix.setScale(scale, scale); 
-      canvas.concat(matrix);
+      matrix.setScale(scale, scale);
+      matrix.postTranslate(xOffset, yOffset);
+      canvas.setMatrix(matrix);
 
       canvas.drawRect(0, 0, width, height, backPaint); 
        
