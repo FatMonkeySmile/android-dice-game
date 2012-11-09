@@ -10,7 +10,8 @@
         android:largeScreens="true"/>
     
 
-    <uses-sdk android:minSdkVersion="8" />
+    <uses-sdk android:minSdkVersion="8" 
+        	  android:targetSdkVersion="9"/>
 
     <application
         android:icon="@drawable/icon"
