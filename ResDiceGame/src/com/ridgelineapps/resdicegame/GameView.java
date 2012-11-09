@@ -22,6 +22,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
@@ -40,6 +41,8 @@ import com.ridgelineapps.dicegame.mappings.Villages;
 public class GameView extends View {
    int width = 480;
    int height = 800;
+   
+   float scale = 0.0f;
    
    Point scoreLoc = new Point(444, 184);
    
@@ -220,15 +223,25 @@ public class GameView extends View {
 
    @Override
    protected void onDraw(Canvas canvas) {
+      if(scale == 0) {
+         float xScale = (float) canvas.getWidth() / width;
+         float yScale = (float) canvas.getHeight() / height;
+         scale = Math.min(xScale, yScale); 
+      }
+      
+      canvas.save();
+      Matrix matrix = new Matrix();
+      matrix.setScale(scale, scale); 
+      canvas.concat(matrix);
+
       canvas.drawRect(0, 0, width, height, backPaint); 
        
-      float scale = (float) playSheetImage.getScaledWidth(canvas) / 480;
-      Rect src = new Rect(0, 0, (int) (width * scale), (int) (height * scale));
-      Rect dest = new Rect(0, 0, width, height); //canvas.getWidth(), canvas.getHeight());
+//      float scale = (float) playSheetImage.getScaledWidth(canvas) / 480;
+//      Rect src = new Rect(0, 0, playSheetImage.getWidth(), playSheetImage.getHeight()); //(int) (width * scale), (int) (height * scale));
+//      Rect dest = new Rect(0, 0, (int) (src.width()* scale), (int) (src.height() * scale)); //canvas.getWidth(), canvas.getHeight());
+//      canvas.drawBitmap(playSheetImage, src, dest, imagePaint);
       
-      canvas.drawBitmap(playSheetImage, src, dest, imagePaint);
-      
-//      canvas.drawBitmap(playSheetImage, 0, 0, imagePaint);
+      canvas.drawBitmap(playSheetImage, 0, 0, imagePaint);
       
       for(UIEntity e : entities) {
          e.draw(canvas);
@@ -272,6 +285,8 @@ public class GameView extends View {
 //          xOffset = (int) (scorePaint.measureText(turn) / 2);
 //          canvas.drawText(turn, 334, 38, scorePaint);
 //      }
+      
+      canvas.restore();
    }
    
    @Override
@@ -285,9 +300,21 @@ public class GameView extends View {
        }
        
        if(event.getAction() != MotionEvent.ACTION_MOVE) {
+          boolean found = false;
            for(UIEntity e : entities) {
-              if(e.isWithin((int) event.getX(), (int) event.getY())) {
-                 e.touch(event.getAction());
+              if(e.isWithin((int) (event.getX() / scale), (int) (event.getY() / scale))) {
+                 found = true;
+                 break;
+              }
+           }
+
+           if(!found) {
+              int offset = 20;
+              for(UIEntity e : entities) {
+                 if(e.isWithin((int) (event.getX() / scale), (int) ((event.getY() - offset) / scale))) {
+                    e.touch(event.getAction());
+                    break;
+                 }
               }
            }
         }
