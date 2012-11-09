@@ -314,7 +314,7 @@ public class GameView extends View {
        if(event.getAction() != MotionEvent.ACTION_MOVE) {
           boolean found = false;
            for(UIEntity e : entities) {
-              if(e.isWithin((int) (event.getX() / scale), (int) (event.getY() / scale))) {
+              if(e.isWithin((int) ((event.getX() - xOffset) / scale), (int) ((event.getY() - yOffset) / scale))) {
                  found = true;
                  break;
               }
@@ -323,7 +323,7 @@ public class GameView extends View {
            if(!found) {
               int offset = 20;
               for(UIEntity e : entities) {
-                 if(e.isWithin((int) (event.getX() / scale), (int) ((event.getY() - offset) / scale))) {
+                 if(e.isWithin((int) ((event.getX() - xOffset) / scale), (int) ((event.getY() - yOffset - offset) / scale))) {
                     e.touch(event.getAction());
                     break;
                  }
