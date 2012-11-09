@@ -27,7 +27,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Point;
-import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -43,6 +42,8 @@ public class GameView extends View {
    int height = 800;
    
    float scale = 0.0f;
+   int xOffset = 0;
+   int yOffset = 0;
    
    Point scoreLoc = new Point(444, 184);
    
@@ -226,7 +227,15 @@ public class GameView extends View {
       if(scale == 0) {
          float xScale = (float) canvas.getWidth() / width;
          float yScale = (float) canvas.getHeight() / height;
-         scale = Math.min(xScale, yScale); 
+         if(xScale == yScale) {
+            scale = xScale;
+         }
+         else if(xScale < yScale) {
+            scale = xScale;
+         }
+         else {
+            scale = yScale;
+         }
       }
       
       canvas.save();
