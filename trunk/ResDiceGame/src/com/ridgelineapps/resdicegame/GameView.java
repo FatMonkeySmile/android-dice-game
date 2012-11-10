@@ -44,6 +44,8 @@ public class GameView extends View {
    float scale = 0.0f;
    int xOffset = 0;
    int yOffset = 0;
+
+   int touchOffset = 20;
    
    Point scoreLoc = new Point(444, 184);
    
@@ -227,12 +229,18 @@ public class GameView extends View {
       if(scale == 0) {
          float xScale = (float) canvas.getWidth() / width;
          float yScale = (float) canvas.getHeight() / height;
-         if(xScale == yScale) {
+         
+         if(xScale > 1 && yScale > 1) {
+             scale = 1;
+//             yOffset = (int) (canvas.getHeight() - height * scale) / 2;
+//             xOffset = (int) (canvas.getWidth() - width * scale) / 2;             
+         }
+         else if(xScale == yScale) {
             scale = xScale;
          }
          else if(xScale < yScale) {
             scale = xScale;
-            yOffset = (int ) (canvas.getHeight() - height * scale) / 2;
+            yOffset = (int) (canvas.getHeight() - height * scale) / 2;
          }
          else {
             scale = yScale;
@@ -240,11 +248,11 @@ public class GameView extends View {
          }
       }
       
-      canvas.save();
+      int restoreCount = canvas.save();
       Matrix matrix = new Matrix();
-      matrix.setScale(scale, scale);
+      matrix.setScale(scale, scale, 0, 0);
       matrix.postTranslate(xOffset, yOffset);
-      canvas.setMatrix(matrix);
+      canvas.concat(matrix);
 
       canvas.drawRect(0, 0, width, height, backPaint); 
        
@@ -298,16 +306,19 @@ public class GameView extends View {
 //          canvas.drawText(turn, 334, 38, scorePaint);
 //      }
       
-      canvas.restore();
+      canvas.restoreToCount(restoreCount);
    }
    
    @Override
    public boolean onTouchEvent(MotionEvent event) {
 
        if(uiDiceRoll.down && event.getAction() == MotionEvent.ACTION_MOVE) {
-           if(!uiDiceRoll.isWithin((int) event.getX(), (int) event.getY())) {
-               uiDiceRoll.down = false;
-               postInvalidate();
+           //TODO: Fix this check to be quicker... 
+           if(!uiDiceRoll.isWithin((int) (event.getX() / scale), (int) (event.getY() / scale))) {
+               if(!uiDiceRoll.isWithin((int) ((event.getX() - xOffset) / scale), (int) ((event.getY() - yOffset - touchOffset) / scale))) {
+                   uiDiceRoll.down = false;
+                   postInvalidate();
+               }
            }
        }
        
@@ -315,15 +326,15 @@ public class GameView extends View {
           boolean found = false;
            for(UIEntity e : entities) {
               if(e.isWithin((int) ((event.getX() - xOffset) / scale), (int) ((event.getY() - yOffset) / scale))) {
+                 e.touch(event.getAction());
                  found = true;
                  break;
               }
            }
 
            if(!found) {
-              int offset = 20;
               for(UIEntity e : entities) {
-                 if(e.isWithin((int) ((event.getX() - xOffset) / scale), (int) ((event.getY() - yOffset - offset) / scale))) {
+                 if(e.isWithin((int) ((event.getX() - xOffset) / scale), (int) ((event.getY() - yOffset - touchOffset) / scale))) {
                     e.touch(event.getAction());
                     break;
                  }
