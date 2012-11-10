@@ -145,7 +145,7 @@ public class UIEntity {
           if(game.canBuildRoad(index)) {
               highlight(p);
           }
-          else if(game.playsheet.roads[index]) {
+          else if(index > 0 && game.playsheet.roads[index]) {
               darken(p);
           }
           else {
