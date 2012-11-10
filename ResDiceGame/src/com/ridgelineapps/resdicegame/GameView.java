@@ -232,8 +232,8 @@ public class GameView extends View {
          
          if(xScale > 1 && yScale > 1) {
              scale = 1;
-//             yOffset = (int) (canvas.getHeight() - height * scale) / 2;
-//             xOffset = (int) (canvas.getWidth() - width * scale) / 2;             
+             yOffset = (int) (canvas.getHeight() - height * scale) / 2;
+             xOffset = (int) (canvas.getWidth() - width * scale) / 2;             
          }
          else if(xScale == yScale) {
             scale = xScale;
@@ -344,9 +344,8 @@ public class GameView extends View {
       
       return true;
    }
-   
-   @Override
-   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-      setMeasuredDimension(width, height);
-   }   
+//   @Override
+//   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//      setMeasuredDimension(width, height);
+//   }   
 }
