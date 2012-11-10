@@ -27,6 +27,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -66,6 +67,8 @@ public class GameView extends View {
    int diceBuffer = 13;
    int rollOffsetX = 65;
    int rollOffsetY = 18;
+   
+   boolean scaleInit = false;
    
    public GameView(Context context, Game game) {
       super(context);
@@ -226,7 +229,8 @@ public class GameView extends View {
 
    @Override
    protected void onDraw(Canvas canvas) {
-      if(scale == 0) {
+      if(!scaleInit) {
+          scaleInit = true;
          float xScale = (float) canvas.getWidth() / width;
          float yScale = (float) canvas.getHeight() / height;
          
@@ -261,7 +265,11 @@ public class GameView extends View {
 //      Rect dest = new Rect(0, 0, (int) (src.width()* scale), (int) (src.height() * scale)); //canvas.getWidth(), canvas.getHeight());
 //      canvas.drawBitmap(playSheetImage, src, dest, imagePaint);
       
-      canvas.drawBitmap(playSheetImage, 0, 0, imagePaint);
+      Rect src = new Rect(0, 0, playSheetImage.getWidth(), playSheetImage.getHeight());
+      Rect dest = new Rect(0, 0, 480, 639);
+      canvas.drawBitmap(playSheetImage, src, dest, imagePaint);
+
+//      canvas.drawBitmap(playSheetImage, 0, 0, imagePaint);
       
       for(UIEntity e : entities) {
          e.draw(canvas);
