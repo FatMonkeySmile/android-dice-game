@@ -13,6 +13,6 @@
     <string name="quit">Quit</string>
     <string name="about_ok">OK</string>
     <string name="about_menu">About</string>
-    <string name="rules_title">Catan Dice Game for Android</string>
+    <string name="rules_title">Rules</string>
     <string name="rules_menu">Rules</string>
 </resources>
