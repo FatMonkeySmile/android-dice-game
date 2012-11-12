@@ -6,7 +6,9 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dp"
+        android:layout_weight="1"
+         >
 
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,35 +18,46 @@
 
             <TextView
                 android:id="@+id/rules_title"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="20dp"
                 android:text="@string/rules_title"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
+            <TextView
+                android:id="@+id/rulesp1_text"
+                android:layout_marginBottom="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+            
             <ImageView
-                android:scaleType="fitCenter"
+                android:id="@+id/rules_image"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:adjustViewBounds="true"
                 android:src="@drawable/rules_graphic" />
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                />
-
-            <Button
-                android:id="@+id/about_ok"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
+                android:id="@+id/rulesp2_text"
                 android:layout_marginTop="10dp"
-                android:text="@string/about_ok" />
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
-
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" 
+        >
+        <Button
+            android:id="@+id/about_ok"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/about_ok" />
+    </LinearLayout>
 </LinearLayout>
