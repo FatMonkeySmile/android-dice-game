@@ -34,6 +34,10 @@
  */
 package com.ridgelineapps.resdicegame;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -41,8 +45,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class Rules extends Activity {
     @Override
@@ -61,10 +65,36 @@ public class Rules extends Activity {
             }
         });
         
-        String html = About.readFile(this, R.raw.rules).toString();
-        WebView w = (WebView) findViewById(R.id.webView);
-        w.setBackgroundColor(0);
-        w.loadData(html, "text/html", "UTF-8");
+        String text = readFile(this, R.raw.rules).toString();
+        TextView w = (TextView) findViewById(R.id.textView);
+        w.setText(text);
+        
+//        String html = About.readFile(this, R.raw.rules).toString();
+//        WebView w = (WebView) findViewById(R.id.webView);
+//        w.setBackgroundColor(0);
+//        w.loadData(html, "text/html", "UTF-8");
     }
+    
+    static CharSequence readFile(Activity activity, int id) {
+       BufferedReader in = null;
+       try {
+           in = new BufferedReader(new InputStreamReader(
+                   activity.getResources().openRawResource(id)));
+           String line;
+           StringBuilder buffer = new StringBuilder();
+           while ((line = in.readLine()) != null) buffer.append(line);
+           return buffer;
+       } catch (IOException e) {
+           return "";
+       } finally {
+          if (in != null) {
+             try {
+                 in.close();
+             } catch (IOException e) {
+                 // Ignore
+             }
+         }
+       }
+   }
 }
 
