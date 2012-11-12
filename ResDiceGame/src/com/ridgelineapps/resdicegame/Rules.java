@@ -34,10 +34,6 @@
  */
 package com.ridgelineapps.resdicegame;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -65,14 +61,13 @@ public class Rules extends Activity {
             }
         });
         
-        String text = About.readFile(this, R.raw.rules).toString();
-        TextView w = (TextView) findViewById(R.id.textView);
-        w.setText(text);
+        String text = About.readFile(this, R.raw.rulesp1).toString();
+        TextView textView = (TextView) findViewById(R.id.rulesp1_text);
+        textView.setText(text);
         
-//        String html = About.readFile(this, R.raw.rules).toString();
-//        WebView w = (WebView) findViewById(R.id.webView);
-//        w.setBackgroundColor(0);
-//        w.loadData(html, "text/html", "UTF-8");
+        text = About.readFile(this, R.raw.rulesp2).toString();
+        textView = (TextView) findViewById(R.id.rulesp2_text);
+        textView.setText(text);
     }
 }
 
