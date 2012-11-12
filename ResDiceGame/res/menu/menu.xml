@@ -5,4 +5,6 @@
         android:title="@string/restart_title" />
     <item android:id="@+id/about"
         android:title="@string/about_menu" />
+    <item android:id="@+id/rules"
+        android:title="@string/rules_menu" />
 </menu>
