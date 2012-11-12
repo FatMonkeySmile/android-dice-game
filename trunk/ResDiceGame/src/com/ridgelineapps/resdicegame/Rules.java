@@ -34,10 +34,6 @@
  */
 package com.ridgelineapps.resdicegame;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -48,7 +44,7 @@ import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.Button;
 
-public class About extends Activity {
+public class Rules extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);        
@@ -56,7 +52,7 @@ public class About extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.about);
+        setContentView(R.layout.rules);
         
         ((Button)findViewById(R.id.about_ok)).setOnClickListener(new OnClickListener() {
             @Override
@@ -65,32 +61,10 @@ public class About extends Activity {
             }
         });
         
-        String html = readFile(this, R.raw.about).toString();
+        String html = About.readFile(this, R.raw.rules).toString();
         WebView w = (WebView) findViewById(R.id.webView);
         w.setBackgroundColor(0);
         w.loadData(html, "text/html", "UTF-8");
-    }
-
-    static CharSequence readFile(Activity activity, int id) {
-        BufferedReader in = null;
-        try {
-            in = new BufferedReader(new InputStreamReader(
-                    activity.getResources().openRawResource(id)));
-            String line;
-            StringBuilder buffer = new StringBuilder();
-            while ((line = in.readLine()) != null) buffer.append(line).append('\n');
-            return buffer;
-        } catch (IOException e) {
-            return "";
-        } finally {
-           if (in != null) {
-              try {
-                  in.close();
-              } catch (IOException e) {
-                  // Ignore
-              }
-          }
-        }
     }
 }
 
