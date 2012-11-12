@@ -65,7 +65,7 @@ public class Rules extends Activity {
             }
         });
         
-        String text = readFile(this, R.raw.rules).toString();
+        String text = About.readFile(this, R.raw.rules).toString();
         TextView w = (TextView) findViewById(R.id.textView);
         w.setText(text);
         
@@ -74,27 +74,5 @@ public class Rules extends Activity {
 //        w.setBackgroundColor(0);
 //        w.loadData(html, "text/html", "UTF-8");
     }
-    
-    static CharSequence readFile(Activity activity, int id) {
-       BufferedReader in = null;
-       try {
-           in = new BufferedReader(new InputStreamReader(
-                   activity.getResources().openRawResource(id)));
-           String line;
-           StringBuilder buffer = new StringBuilder();
-           while ((line = in.readLine()) != null) buffer.append(line);
-           return buffer;
-       } catch (IOException e) {
-           return "";
-       } finally {
-          if (in != null) {
-             try {
-                 in.close();
-             } catch (IOException e) {
-                 // Ignore
-             }
-         }
-       }
-   }
 }
 
