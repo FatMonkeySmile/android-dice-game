@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ridgelineapps.resdicegame"
-    android:versionCode="10"
-    android:versionName="1.9" >
+    android:versionCode="11"
+    android:versionName="1.10" >
     
     <uses-sdk android:minSdkVersion="7"/>
     
-       <supports-screens 
+       <!-- supports-screens 
         android:smallScreens="false"
         android:normalScreens="true"
-        android:largeScreens="true" />
+        android:largeScreens="true" / 
+        -->
     
 
     <application
