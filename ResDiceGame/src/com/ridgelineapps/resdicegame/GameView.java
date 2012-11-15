@@ -28,6 +28,8 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -39,6 +41,11 @@ import com.ridgelineapps.dicegame.mappings.Scores;
 import com.ridgelineapps.dicegame.mappings.Villages;
 
 public class GameView extends View {
+   Matrix matrix;
+   
+   Rect playsheetSrcRect;
+   Rect playsheetDestRect;
+   
    int width = 480;
    int height = 800;
    
@@ -79,6 +86,9 @@ public class GameView extends View {
       imagePaint.setFilterBitmap(true);
       imagePaint.setAntiAlias(true);
       playSheetImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.orig_sheet);
+      
+      playsheetSrcRect = new Rect(0, 0, playSheetImage.getWidth(), playSheetImage.getHeight());
+      playsheetDestRect = new Rect(0, 0, 480, 639);
 
       scorePaint = new Paint();
       scorePaint.setFakeBoldText(true);
@@ -234,7 +244,19 @@ public class GameView extends View {
          float xScale = (float) canvas.getWidth() / width;
          float yScale = (float) canvas.getHeight() / height;
          
-         if(xScale > 1 && yScale > 1) {
+         double screenInches = 0;
+         try
+         {
+            Display display = activity.getWindowManager().getDefaultDisplay();
+            DisplayMetrics dm = new DisplayMetrics();
+            display.getMetrics(dm);
+            screenInches = Math.sqrt(Math.pow(display.getWidth() / dm.xdpi, 2) + Math.pow(display.getHeight() / dm.ydpi, 2));
+         }
+         catch(Throwable t) {
+            t.printStackTrace();
+         }
+         
+         if(xScale > 1 && yScale > 1 && screenInches >= 7) {
              scale = 1;
              yOffset = (int) (canvas.getHeight() - height * scale) / 2;
              xOffset = (int) (canvas.getWidth() - width * scale) / 2;             
@@ -250,12 +272,13 @@ public class GameView extends View {
             scale = yScale;
             xOffset = (int) (canvas.getWidth() - width * scale) / 2;
          }
+         
+         matrix = new Matrix();
+         matrix.setScale(scale, scale, 0, 0);
+         matrix.postTranslate(xOffset, yOffset);
       }
       
       int restoreCount = canvas.save();
-      Matrix matrix = new Matrix();
-      matrix.setScale(scale, scale, 0, 0);
-      matrix.postTranslate(xOffset, yOffset);
       canvas.concat(matrix);
 
       canvas.drawRect(0, 0, width, height, backPaint); 
@@ -265,9 +288,7 @@ public class GameView extends View {
 //      Rect dest = new Rect(0, 0, (int) (src.width()* scale), (int) (src.height() * scale)); //canvas.getWidth(), canvas.getHeight());
 //      canvas.drawBitmap(playSheetImage, src, dest, imagePaint);
       
-      Rect src = new Rect(0, 0, playSheetImage.getWidth(), playSheetImage.getHeight());
-      Rect dest = new Rect(0, 0, 480, 639);
-      canvas.drawBitmap(playSheetImage, src, dest, imagePaint);
+      canvas.drawBitmap(playSheetImage, playsheetSrcRect, playsheetDestRect, imagePaint);
 
 //      canvas.drawBitmap(playSheetImage, 0, 0, imagePaint);
       
