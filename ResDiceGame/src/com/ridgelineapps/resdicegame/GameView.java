@@ -258,13 +258,20 @@ public class GameView extends View {
             t.printStackTrace();
          }
          
-         if(xScale > 1 && yScale > 1 && screenInches >= 7) {
+         if(xScale > 1 && yScale > 1 && screenInches >= 6) {
             if(density > 1) {
                scale = density;
+               if(yScale < scale) {
+                  scale = yScale;
+               }
+               if(xScale < scale) {
+                  scale = xScale;
+               }
             }
             else {
                scale = 1;               
             }
+            scale = 1;               
             yOffset = (int) (canvas.getHeight() - height * scale) / 2;
             xOffset = (int) (canvas.getWidth() - width * scale) / 2;             
          }
