@@ -271,7 +271,6 @@ public class GameView extends View {
             else {
                scale = 1;               
             }
-            scale = 1;               
             yOffset = (int) (canvas.getHeight() - height * scale) / 2;
             xOffset = (int) (canvas.getWidth() - width * scale) / 2;             
          }
