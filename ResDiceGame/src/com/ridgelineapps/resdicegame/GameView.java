@@ -240,16 +240,18 @@ public class GameView extends View {
    @Override
    protected void onDraw(Canvas canvas) {
       if(!scaleInit) {
-          scaleInit = true;
+         scaleInit = true;
          float xScale = (float) canvas.getWidth() / width;
          float yScale = (float) canvas.getHeight() / height;
          
          double screenInches = 0;
+         float density = 0;
          try
          {
             Display display = activity.getWindowManager().getDefaultDisplay();
             DisplayMetrics dm = new DisplayMetrics();
             display.getMetrics(dm);
+            density = dm.density;
             screenInches = Math.sqrt(Math.pow(display.getWidth() / dm.xdpi, 2) + Math.pow(display.getHeight() / dm.ydpi, 2));
          }
          catch(Throwable t) {
@@ -257,9 +259,14 @@ public class GameView extends View {
          }
          
          if(xScale > 1 && yScale > 1 && screenInches >= 7) {
-             scale = 1;
-             yOffset = (int) (canvas.getHeight() - height * scale) / 2;
-             xOffset = (int) (canvas.getWidth() - width * scale) / 2;             
+            if(density > 1) {
+               scale = density;
+            }
+            else {
+               scale = 1;               
+            }
+            yOffset = (int) (canvas.getHeight() - height * scale) / 2;
+            xOffset = (int) (canvas.getWidth() - width * scale) / 2;             
          }
          else if(xScale == yScale) {
             scale = xScale;
