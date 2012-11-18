@@ -1,7 +1,9 @@
 package com.ridgelineapps.resdicegame;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -11,9 +13,11 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,7 +83,7 @@ public class HighScores extends Activity {
         }
         
         Date d = new Date(date);
-        return d.toString();
+        return DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault()).format(d);
     }
     
     public static void score(Activity activity, int score) {
@@ -107,13 +111,13 @@ public class HighScores extends Activity {
                 e.printStackTrace();
             }
             
-            if(score >= hs) {
-                if(hs > 0) {
+            if(!added && score >= hs) {
+//                if(hs > 0) {
                     newTop5 = true;
                     if(scores.size() == 0) {
                         newHigh = true;
                     }
-                }
+//                }
                 added = true;
                 ScoreAndDate sad = new ScoreAndDate();
                 sad.score = score;
@@ -130,7 +134,7 @@ public class HighScores extends Activity {
         if(added) {
             Editor editor = prefs.edit();
             for(int i=1; i <= 5; i++) {
-                ScoreAndDate sad = scores.get(i);
+                ScoreAndDate sad = scores.get(i - 1);
                 editor.putString("hs_score_" + i, "" + sad.score);
                 editor.putString("hs_date_" + i, "" + sad.date);
             }

@@ -97,6 +97,14 @@ public class Game {
       if(!firstTurn) {
          turnsTaken++;
          playsheet.scoreTurn(turnsTaken);
+         if(isGameDone()) {
+             if(!scored) {
+                 scored = true;
+                 if(playsheet.getScore() > 0) {
+                     HighScores.score(gameView.activity, playsheet.getScore());
+                 }
+             }
+         }
       }
       if(gameView != null)
          gameView.postInvalidate();      
@@ -145,15 +153,6 @@ public class Game {
       rolls++;
       if(gameView != null)
          gameView.postInvalidate();
-      
-      if(isGameDone()) {
-          if(!scored) {
-              scored = true;
-              if(playsheet.getScore() > 0) {
-                  HighScores.score(gameView.activity, playsheet.getScore());
-              }
-          }
-      }
    }
    
    public boolean canRoll() {
