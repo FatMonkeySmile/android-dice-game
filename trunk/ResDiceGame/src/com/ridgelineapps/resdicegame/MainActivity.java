@@ -74,6 +74,9 @@ public class MainActivity extends Activity {
       case R.id.rules:
          startActivity(new Intent(MainActivity.this, Rules.class));
          break;
+      case R.id.high_scores:
+          startActivity(new Intent(MainActivity.this, HighScores.class));
+          break;
       }
       return true;
    }
