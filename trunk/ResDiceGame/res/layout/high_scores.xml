@@ -138,12 +138,14 @@
 
             <TextView
                 android:id="@+id/textView5_1"
+                android:gravity="left"
                 android:paddingRight="50dip"
                 android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/textView5_2"
+                android:gravity="right"
                 android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </TableRow>
