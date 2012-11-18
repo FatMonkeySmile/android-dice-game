@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tableLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center" >
+
+        <TableRow
+            android:id="@+id/tableRow0"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dip" >
+
+            <TextView
+                android:layout_span="3"
+                android:gravity="center"
+                android:text="Top Scores"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowSep"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dip" >
+
+            <View
+                android:layout_height="2dip"
+                android:layout_span="3"
+                android:background="#F0F0F0" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="15dip" >
+
+            <!--
+                 TextView
+                android:id="@+id/textView1_1"
+                android:gravity="left"
+                android:text="1."
+                android:textAppearance="?android:attr/textAppearanceLarge" 
+
+            -->
+
+            <TextView
+                android:id="@+id/textView1_1"
+                android:gravity="left"
+                android:text="1"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView1_2"
+                android:gravity="right"
+                android:text="1/10/12"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="15dip" >
+
+            <TextView
+                android:id="@+id/textView2_1"
+                android:gravity="left"
+                android:text="4"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView2_2"
+                android:gravity="right"
+                android:text="1/10/12"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="15dip" >
+
+            <TextView
+                android:id="@+id/textView3_1"
+                android:gravity="left"
+                android:text="-"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView3_2"
+                android:gravity="right"
+                android:text="-"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="15dip" >
+
+            <TextView
+                android:id="@+id/textView4_1"
+                android:gravity="left"
+                android:text="-"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView4_2"
+                android:gravity="right"
+                android:text="-"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="15dip" >
+
+            <TextView
+                android:id="@+id/textView5_1"
+                android:paddingRight="50dip"
+                android:text="-"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView5_2"
+                android:text="-"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow6"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="25dip" >
+
+            <Button
+                android:id="@+id/high_scores_ok"
+                android:layout_span="3"
+                android:text="@string/about_ok" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>
