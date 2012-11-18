@@ -146,7 +146,7 @@ public class HighScores extends Activity {
             Toast.makeText(activity, "New High Score", Toast.LENGTH_SHORT).show();
         }
         else if(newTop5) {
-            Toast.makeText(activity, "New Top 5 Score" + score, Toast.LENGTH_SHORT).show();            
+            Toast.makeText(activity, "New Top 5 Score", Toast.LENGTH_SHORT).show();            
         }
     }
     
