@@ -18,6 +18,8 @@ package com.ridgelineapps.resdicegame;
 
 import java.util.ArrayList;
 
+import android.widget.Toast;
+
 //TODO: 
 //  Confirm "Use knight resource(s)"
 //  Center vertically
@@ -30,6 +32,7 @@ public class Game {
    ArrayList<Dice.Value> knightResources;
    boolean builtResourceThisTurn;
    int turnsTaken;
+   boolean scored = false;
    
    public static Dice.Value[] RESOURCES_ROAD = new Dice.Value[]{ Dice.Value.Brick, Dice.Value.Lumber };
    public static Dice.Value[] RESOURCES_VILLAGE = new Dice.Value[]{ Dice.Value.Lumber, Dice.Value.Brick, Dice.Value.Wool, Dice.Value.Grain };
@@ -61,6 +64,7 @@ public class Game {
    public void reset() {
       turnsTaken = 0;
       playsheet.reset();
+      scored = false;
       newTurn(true);
       if(gameView != null)
          gameView.postInvalidate();      
@@ -140,7 +144,16 @@ public class Game {
       
       rolls++;
       if(gameView != null)
-         gameView.postInvalidate();      
+         gameView.postInvalidate();
+      
+      if(isGameDone()) {
+          if(!scored) {
+              scored = true;
+              if(playsheet.getScore() > 0) {
+                  HighScores.score(gameView.activity, playsheet.getScore());
+              }
+          }
+      }
    }
    
    public boolean canRoll() {
