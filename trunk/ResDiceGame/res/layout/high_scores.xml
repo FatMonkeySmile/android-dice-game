@@ -37,6 +37,8 @@
             <View
                 android:layout_height="2dip"
                 android:layout_span="3"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:background="#F0F0F0" />
         </TableRow>
 
