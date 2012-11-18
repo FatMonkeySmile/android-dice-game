@@ -15,4 +15,5 @@
     <string name="about_menu">About</string>
     <string name="rules_title">Catan Dice Game Rules</string>
     <string name="rules_menu">Rules</string>
+    <string name="high_scores_menu">Top Scores</string>
 </resources>
