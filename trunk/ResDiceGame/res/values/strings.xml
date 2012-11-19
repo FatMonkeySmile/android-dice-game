@@ -11,9 +11,13 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="quit">Quit</string>
-    <string name="about_ok">OK</string>
+    <string name="ok_button">OK</string>
     <string name="about_menu">About</string>
     <string name="rules_title">Catan Dice Game Rules</string>
-    <string name="rules_menu">Rules</string>
+    <string name="rules_menu">Rules</string> 
+    <string name="high_scores_default">-</string>
+    <string name="high_scores_title">Top Scores</string>
     <string name="high_scores_menu">Top Scores</string>
+    <string name="high_scores_toast">New High Score</string>
+    <string name="high_scores_top_5_toast">New Top 5 Score</string>
 </resources>
