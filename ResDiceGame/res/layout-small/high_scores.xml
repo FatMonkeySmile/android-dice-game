@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center" >
+
+    <TableRow
+        android:id="@+id/tableRow0"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dip" >
+
+        <TextView
+            android:layout_span="3"
+            android:gravity="center"
+            android:text="@string/high_scores_title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRowSep"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dip" >
+
+        <View
+            android:layout_height="2dip"
+            android:layout_span="3"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#F0F0F0" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dip" >
+
+        <!--
+             TextView
+            android:id="@+id/textView1_1"
+            android:gravity="left"
+            android:text="1."
+             
+
+        -->
+
+        <TextView
+            android:id="@+id/textView1_1"
+            android:gravity="left"
+            android:paddingLeft="10dp"
+            android:minWidth="95dp"
+             />
+
+        <TextView
+            android:id="@+id/textView1_2"
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:minWidth="95dp"
+             />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dip" >
+
+        <TextView
+            android:id="@+id/textView2_1"
+            android:paddingLeft="10dp"
+            android:gravity="left"
+             />
+
+        <TextView
+            android:id="@+id/textView2_2"
+            android:paddingRight="10dp"
+            android:gravity="right"
+             />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dip" >
+
+        <TextView
+            android:id="@+id/textView3_1"
+            android:paddingLeft="10dp"
+            android:gravity="left"
+             />
+
+        <TextView
+            android:id="@+id/textView3_2"
+            android:paddingRight="10dp"
+            android:gravity="right"
+             />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dip" >
+
+        <TextView
+            android:id="@+id/textView4_1"
+            android:paddingLeft="10dp"
+            android:gravity="left"
+             />
+
+        <TextView
+            android:id="@+id/textView4_2"
+            android:paddingRight="10dp"
+            android:gravity="right"
+             />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow5"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dip" >
+
+        <TextView
+            android:id="@+id/textView5_1"
+            android:paddingLeft="10dp"
+            android:gravity="left"
+             />
+
+        <TextView
+            android:id="@+id/textView5_2"
+            android:paddingRight="10dp"
+            android:gravity="right"
+             />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow6"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="25dip" >
+
+        <Button
+            android:id="@+id/high_scores_ok"
+            android:layout_span="3"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:text="@string/ok_button" />
+    </TableRow>
+</TableLayout>

@@ -22,7 +22,7 @@
             <TextView
                 android:layout_span="3"
                 android:gravity="center"
-                android:text="Top Scores"
+                android:text="@string/high_scores_title"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textStyle="bold" />
         </TableRow>
@@ -49,21 +49,11 @@
             android:gravity="center"
             android:padding="15dip" >
 
-            <!--
-                 TextView
-                android:id="@+id/textView1_1"
-                android:gravity="left"
-                android:text="1."
-                android:textAppearance="?android:attr/textAppearanceLarge" 
-
-            -->
-
             <TextView
                 android:id="@+id/textView1_1"
                 android:gravity="left"
                 android:paddingLeft="15dp"
                 android:minWidth="135dp"
-                android:text="1"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -71,7 +61,6 @@
                 android:gravity="right"
                 android:paddingRight="15dp"
                 android:minWidth="135dp"
-                android:text="1/10/12"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </TableRow>
 
@@ -86,14 +75,12 @@
                 android:id="@+id/textView2_1"
                 android:paddingLeft="15dp"
                 android:gravity="left"
-                android:text="4"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/textView2_2"
                 android:paddingRight="15dp"
                 android:gravity="right"
-                android:text="1/10/12"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </TableRow>
 
@@ -108,14 +95,12 @@
                 android:id="@+id/textView3_1"
                 android:paddingLeft="15dp"
                 android:gravity="left"
-                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/textView3_2"
                 android:paddingRight="15dp"
                 android:gravity="right"
-                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </TableRow>
 
@@ -130,14 +115,12 @@
                 android:id="@+id/textView4_1"
                 android:paddingLeft="15dp"
                 android:gravity="left"
-                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/textView4_2"
                 android:paddingRight="15dp"
                 android:gravity="right"
-                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </TableRow>
 
@@ -152,14 +135,12 @@
                 android:id="@+id/textView5_1"
                 android:paddingLeft="15dp"
                 android:gravity="left"
-                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/textView5_2"
                 android:paddingRight="15dp"
                 android:gravity="right"
-                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </TableRow>
 
@@ -175,7 +156,7 @@
                 android:layout_span="3"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:text="@string/about_ok" />
+                android:text="@string/ok_button" />
         </TableRow>
     </TableLayout>
 
