@@ -144,10 +144,36 @@ public class Game {
          return;
       }
       
-      for(Dice die : dice) {
+      int len = dice.length;
+      Dice.Value[] old = new Dice.Value[len];
+      for(int i=0; i < len; i++) {
+         Dice die = dice[i];
          if(!die.isHeld()) {
+            old[i] = die.getValue();
             die.roll();
-         }
+         }         
+      }
+      
+      // People think the dice are not random when they don't change, 
+      // so keep the same dice, but switch order if possible to help
+      // remove that disconcerting "I rolled, but some of the dice
+      // didn't change" effect.
+      for(int i=0; i < len; i++) {
+         Dice die = dice[i];
+         if(!die.isHeld()) {
+            if(old[i] == die.getValue()) {
+               for(int j=0; j < len; j++) {
+                  Dice die2 = dice[j];
+                  if(i == j || die2.isHeld()) {
+                     continue;
+                  }
+                  if(old[j] != die.getValue() && old[i] != die2.getValue()) {
+                     die.swap(die2);
+                     break;
+                  }
+               }
+            }
+         }         
       }
       
       rolls++;

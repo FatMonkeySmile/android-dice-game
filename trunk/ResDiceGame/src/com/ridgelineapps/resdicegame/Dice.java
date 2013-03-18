@@ -60,6 +60,12 @@ public class Dice {
       }
    }
    
+   public void swap(Dice die) {
+      Dice.Value temp = die.getValue();
+      die.setValue(value);
+      value = temp;      
+   }
+   
    public boolean isHeld() {
       return held;
    }
