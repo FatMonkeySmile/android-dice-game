@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Catan Würfel Spiel</string>
+    <string name="first_roll">1. Wurf</string>
+    <string name="second_roll">2. Wurf</string>
+    <string name="third_roll">3. Wurf</string>
+    <string name="play_again">Nochmal spielen</string>
+    <string name="done">Fertig</string>
+    <string name="restart_title">Neustart</string>
+    <string name="restart_text">Sind Sie sicher, dass Sie das Spiel neu starten möchten?</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="quit">Beenden</string>
+    <string name="ok_button">OK</string>
+    <string name="about_menu">Über</string>
+    <string name="rules_title">Catan Würfel Spiel Regeln</string>
+    <string name="rules_menu">Regeln</string> 
+    <string name="high_scores_default">-</string>
+    <string name="high_scores_title">Highscore</string>
+    <string name="high_scores_menu">Highscore</string>
+    <string name="high_scores_toast">Neuer Highscore</string>
+    <string name="high_scores_top_5_toast">Neuer Top 5 Highscore</string>
+</resources>
